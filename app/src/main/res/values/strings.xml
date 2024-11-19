@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ABCdoCadu</string>
+    <string name="Intro_main"><b>Olá!</b>\nEu sou o Cadu</string>
+    <string name="Login_title">Login</string>
+    <string name="Input_password">Insira a sua senha</string>
+    <string name="Input_email">Insira o seu email</string>
+    <string name="Btn_login">Entrar</string>
+    <string name="checkbox_login">Guardar</string>
+</resources>
