@@ -14,6 +14,7 @@
         android:layout_height="@dimen/cloud_height"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="150dp"
+        android:contentDescription="@string/Cloud_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,6 +26,7 @@
         android:layout_height="@dimen/cloud_height"
         android:layout_marginStart="200dp"
         android:layout_marginBottom="100dp"
+        android:contentDescription="@string/Cloud_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,15 +38,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:text="@string/Login_title"
-        android:textSize="24sp"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
         android:layout_marginTop="50dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
@@ -56,8 +58,8 @@
 
     <EditText
         android:id="@+id/edit_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
         android:layout_marginTop="25dp"
         android:background="@android:drawable/editbox_background"
         android:backgroundTint="#FFFFFF"
@@ -70,10 +72,11 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/app_pink"
+        android:onClick="login"
         android:text="@string/Btn_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

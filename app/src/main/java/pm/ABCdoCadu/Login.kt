@@ -47,6 +47,7 @@ class Login : AppCompatActivity() {
                         msg += " + SAVE"
                     }
 
+                    //After login, redirect to Home activity
                     startActivity(Intent(this,Home::class.java))
                     finish()
                 }
@@ -62,6 +63,8 @@ class Login : AppCompatActivity() {
                 return params
             }
         }
+        // Add the request to the RequestQueue.
+        queue.add(postRequest)
 
     }
 }
