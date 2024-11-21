@@ -2,4 +2,7 @@
 <resources>
     <dimen name="cloud_width">200dp</dimen>
     <dimen name="cloud_height">85dp</dimen>
+    <dimen name="btn_home_width">120dp</dimen>
+    <dimen name="btn_home_height">60dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

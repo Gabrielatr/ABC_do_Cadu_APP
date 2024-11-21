@@ -5,6 +5,101 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/sky"
     tools:context=".Home">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_cloud" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_cloud" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TableLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_caa"
+                android:layout_width="@dimen/btn_home_width"
+                android:layout_height="@dimen/btn_home_height"
+                android:backgroundTint="@color/white"
+                android:text="CAA"
+                android:textColor="@color/black"
+                android:textColorLink="@color/black"
+                app:iconTint="@color/black" />
+
+            <Button
+                android:id="@+id/btn_cartas"
+                android:layout_width="@dimen/btn_home_width"
+                android:layout_height="@dimen/btn_home_height"
+                android:backgroundTint="@color/white"
+                android:text="Cartas"
+                android:textColor="@color/black"
+                android:textColorLink="@color/black"
+                app:icon="@drawable/ic_cards"
+                app:iconTint="@color/black" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_jogar"
+                android:layout_width="@dimen/btn_home_width"
+                android:layout_height="@dimen/btn_home_height"
+                android:backgroundTint="@color/white"
+                android:text="Jogar"
+                android:textColor="@color/black"
+                android:textColorLink="@color/black"
+                app:icon="@drawable/ic_game"
+                app:iconTint="@color/black" />
+
+            <Button
+                android:id="@+id/btn_adivinha"
+                android:layout_width="@dimen/btn_home_width"
+                android:layout_height="@dimen/btn_home_height"
+                android:backgroundTint="@color/white"
+                android:text="Add"
+                android:textColor="@color/black"
+                app:icon="@drawable/ic_crystalball" />
+        </TableRow>
+
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

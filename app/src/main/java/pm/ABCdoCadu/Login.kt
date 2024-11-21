@@ -28,7 +28,7 @@ class Login : AppCompatActivity() {
 
         //RequestQueue
         val queue = Volley.newRequestQueue(this)
-        val url = "https://esan-tesp-ds-paw.web.ua.pt/tesp-ua-05/login/"
+        val url = "https://esan-tesp-ds-paw.web.ua.pt/tesp-ds-05/login/"
 
         //POST request + get string response from the provided URL.
         val postRequest = object : StringRequest(Method.POST, url,
