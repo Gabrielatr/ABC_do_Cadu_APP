@@ -41,6 +41,7 @@
         android:layout_marginBottom="200dp"
         android:text="@string/Intro_main"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

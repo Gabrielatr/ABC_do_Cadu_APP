@@ -28,12 +28,15 @@ class Login : AppCompatActivity() {
 
         //RequestQueue
         val queue = Volley.newRequestQueue(this)
-        val url = "https://esan-tesp-ds-paw.web.ua.pt/tesp-ds-05/login/"
+        val url = "https://esan-tesp-ds-paw.web.ua.pt/tesp-ds-g5/api/index.php"
 
+        Toast.makeText(this, "Começa a fazer o login", Toast.LENGTH_SHORT).show()
         //POST request + get string response from the provided URL.
         val postRequest = object : StringRequest(Method.POST, url,
             { response ->
                 var msg = response
+
+                Toast.makeText(this, "Login trabalhando", Toast.LENGTH_SHORT).show()
 
                 //If response is OK, do login
                 if (response == "OK") {
@@ -47,10 +50,15 @@ class Login : AppCompatActivity() {
                         msg += " + SAVE"
                     }
 
+                    Toast.makeText(this, "Login efetuado", Toast.LENGTH_SHORT).show()
+
                     //After login, redirect to Home activity
                     startActivity(Intent(this,Home::class.java))
                     finish()
                 }
+
+                binding.titleLogin.text = response
+                Toast.makeText(this, response, Toast.LENGTH_SHORT).show()
             },
             { error ->
                 Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show()
