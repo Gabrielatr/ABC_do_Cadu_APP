@@ -5,15 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import pm.ABCdoCadu.databinding.ActivityLoginBinding
 
-class Login : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private val binding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
@@ -24,7 +21,7 @@ class Login : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    fun login(view: View){
+    fun login(){
 
         //RequestQueue
         val queue = Volley.newRequestQueue(this)
@@ -53,7 +50,7 @@ class Login : AppCompatActivity() {
                     Toast.makeText(this, "Login efetuado", Toast.LENGTH_SHORT).show()
 
                     //After login, redirect to Home activity
-                    startActivity(Intent(this,Home::class.java))
+                    startActivity(Intent(this,HomeActivity::class.java))
                     finish()
                 }
 
@@ -74,5 +71,10 @@ class Login : AppCompatActivity() {
         // Add the request to the RequestQueue.
         queue.add(postRequest)
 
+    }
+
+
+    fun redirect(){
+        startActivity(Intent(this,HomeActivity::class.java))
     }
 }

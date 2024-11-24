@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/sky"
-    tools:context=".Login">
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/img_cloud1_login"
@@ -78,7 +78,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/app_pink"
-        android:onClick="login"
+        android:onClick="redirect"
         android:text="@string/Btn_login"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"

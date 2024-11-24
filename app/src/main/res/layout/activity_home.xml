@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/sky"
-    tools:context=".Home">
+    tools:context=".HomeActivity">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -61,6 +61,9 @@
                 android:text="CAA"
                 android:textColor="@color/black"
                 android:textColorLink="@color/black"
+                app:icon="@drawable/ic_caa"
+                app:iconPadding="2dp"
+                app:iconSize="35dp"
                 app:iconTint="@color/black" />
 
             <Button
@@ -69,11 +72,14 @@
                 android:layout_height="@dimen/btn_home_height"
                 android:layout_margin="5dp"
                 android:backgroundTint="@color/white"
+                android:onClick="redirectToDict"
                 android:text="Cartas"
                 android:textColor="@color/black"
                 android:textColorLink="@color/black"
-                app:icon="@drawable/ic_cards"
-                app:iconTint="@color/black" />
+                app:icon="@drawable/ic_dict"
+                app:iconPadding="2dp"
+                app:iconSize="30dp"
+                app:iconTint="@color/app_pink" />
         </TableRow>
 
         <TableRow
@@ -91,7 +97,10 @@
                 android:textColor="@color/black"
                 android:textColorLink="@color/black"
                 app:icon="@drawable/ic_game"
-                app:iconTint="@color/black" />
+                app:iconPadding="2dp"
+                app:iconSize="35dp"
+                app:iconTint="#00FFFFFF"
+                app:iconTintMode="screen" />
 
             <Button
                 android:id="@+id/btn_adivinha"
@@ -102,7 +111,10 @@
                 android:text="@string/btn_Adivinha"
                 android:textColor="@color/black"
                 app:icon="@drawable/ic_crystalball"
-                app:iconTint="#00FFFFFF" />
+                app:iconPadding="2dp"
+                app:iconSize="35dp"
+                app:iconTint="#00FFFFFF"
+                app:iconTintMode="screen" />
         </TableRow>
 
     </TableLayout>
