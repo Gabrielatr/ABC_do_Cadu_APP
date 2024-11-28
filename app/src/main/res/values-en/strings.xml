@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cadu\'s ABC</string>
+    <string name="Intro_main"><b>Hello!</b>My name is Cadu!</string>
+    <string name="Input_password">Password</string>
+    <string name="Input_email">Email</string>
+    <string name="Btn_login">Log in</string>
+    <string name="checkbox_login">Save data</string>
+    <string name="btn_Adivinha">Let me guest</string>
+</resources>
