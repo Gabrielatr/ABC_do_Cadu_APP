@@ -1,11 +1,16 @@
 <resources>
     <string name="app_name">ABCdoCadu</string>
     <string name="Intro_main"><b>Olá!</b>\nEu sou o Cadu</string>
-    <string name="Login_title" translatable="false">Login</string>
+    <string name="title_login" translatable="false">Login</string>
     <string name="Input_password">Insira a sua senha</string>
     <string name="Input_email">Insira o seu email</string>
     <string name="Btn_login">Entrar</string>
     <string name="checkbox_login">Guardar dados</string>
     <string name="Desc_cloud" translatable="false">Cloud</string>
     <string name="btn_Adivinha">Adivinha</string>
+    <string name="title_register">Registro</string>
+    <string name="label_username">Nome</string>
+    <string name="label_email">Email</string>
+    <string name="label_pass">Senha</string>
+    <string name="input_username">Insira seu nome</string>
 </resources>

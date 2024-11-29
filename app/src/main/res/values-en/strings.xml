@@ -7,4 +7,5 @@
     <string name="Btn_login">Log in</string>
     <string name="checkbox_login">Save data</string>
     <string name="btn_Adivinha">Let me guest</string>
+    <string name="title_register">Sign in</string>
 </resources>
