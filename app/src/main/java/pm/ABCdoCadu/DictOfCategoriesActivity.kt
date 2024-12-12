@@ -22,7 +22,7 @@ class DictOfCategoriesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dict_categories)
 
-        recyclerView = findViewById<RecyclerView>(R.id.RecyclerView)
+        recyclerView = findViewById<RecyclerView>(R.id.CategoriesView)
 
         // Escolher uma das opções para o layout do RecyclerView :
         // - LinearLayoutManager
@@ -36,7 +36,7 @@ class DictOfCategoriesActivity : AppCompatActivity() {
 
         // Inicializar a RequestQueue e definir o URL do pedido
         val queue = Volley.newRequestQueue(this)
-        val url = "https://esan-tesp-ds-paw.web.ua.pt/nveloso/api/getDestinos.php"
+        val url = "https://esan-tesp-ds-paw.web.ua.pt/tesp-ds-g5/projeto/api/category/read.php"
 
 
         // Solicitar uma string de resposta a um pedido por URL
@@ -48,7 +48,7 @@ class DictOfCategoriesActivity : AppCompatActivity() {
                     for (i in 0 until jsonArray.length()) {
                         val c = jsonArray.getJSONObject(i)
                         val d: Category = Category()
-                        d.name = c.getString("destino")
+                        d.name = c.getString("name")
                         categories.add(d)
                     }
                 } catch (e: JSONException) {
@@ -58,7 +58,7 @@ class DictOfCategoriesActivity : AppCompatActivity() {
                 val adapter: CategoryAdapter = CategoryAdapter(categories)
                 recyclerView.setAdapter(adapter)
             },
-            { Toast.makeText(this@MainActivity, "Erro", Toast.LENGTH_SHORT).show() })
+            { Toast.makeText(this, "Erro", Toast.LENGTH_SHORT).show() })
 
         // Adicionar o pedido à RequestQueue.
         queue.add(stringRequest)

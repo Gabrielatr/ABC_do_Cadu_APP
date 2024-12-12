@@ -104,6 +104,7 @@
             tools:layout_conversion_absoluteWidth="411dp">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/CategoriesView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layoutManager="GridLayoutManager"
@@ -112,11 +113,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:spanCount="2"
-                tools:listitem="@layout/item_category_dict"
                 tools:layout_conversion_absoluteHeight="924dp"
-                tools:layout_editor_absoluteY="64dp"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_conversion_absoluteWidth="411dp" />
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:listitem="@layout/item_category_dict" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

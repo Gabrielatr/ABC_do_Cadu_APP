@@ -67,25 +67,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/right" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="192dp"
-        android:layout_height="146dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.228"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_rainbow"
-        tools:layout_editor_absoluteY="128dp" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="192dp"
-        android:layout_height="146dp"
-        android:rotation="90"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.84"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_rainbow"
-        tools:layout_editor_absoluteY="128dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
