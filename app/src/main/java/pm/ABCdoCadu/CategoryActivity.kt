@@ -5,14 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import pm.ABCdoCadu.model.Category
 
-class DictOfCategoriesActivity : AppCompatActivity() {
+class CategoryActivity : AppCompatActivity() {
 
     lateinit var categorias: java.util.ArrayList<Category>
     lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dict_categories)
+        setContentView(R.layout.activity_category)
 
         /*
         recyclerView = findViewById<RecyclerView>(R.id.recyclerView)

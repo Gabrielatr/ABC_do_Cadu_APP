@@ -54,7 +54,7 @@
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".DictOfWordsActivity">
+            tools:context=".WordsActivity">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:spanCount="2"
-                tools:listitem="@layout/item_category_dict" />
+                tools:listitem="@layout/item_category" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

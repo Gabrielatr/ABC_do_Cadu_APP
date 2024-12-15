@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    fun nextPage(){
+    fun nextPage(view: View){
         startActivity(Intent(this,LoginActivity::class.java))
     }
 }

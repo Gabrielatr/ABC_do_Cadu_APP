@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    fun redirect(){
+    fun redirect(view: View){
         startActivity(Intent(this,HomeActivity::class.java))
     }
 }

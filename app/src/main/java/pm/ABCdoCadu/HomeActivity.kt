@@ -17,7 +17,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    fun redirectToDict(){
-        startActivity(Intent(this,DictOfWordsActivity::class.java))
+    fun redirectToDict(view: View){
+        startActivity(Intent(this,CategoryActivity::class.java))
     }
 }

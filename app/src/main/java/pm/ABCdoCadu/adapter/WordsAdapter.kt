@@ -33,7 +33,7 @@ class WordsAdapter : RecyclerView.Adapter<WordsAdapter.ViewHolder> {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView: View = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.item_word_dict, parent, false)
+            .inflate(R.layout.item_word, parent, false)
         return ViewHolder(itemView)
     }
 
