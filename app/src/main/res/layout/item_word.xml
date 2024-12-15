@@ -1,61 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="150dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
-    android:layout_gravity="center"
-    android:layout_marginLeft="30dp"
+    android:layout_marginLeft="0dp"
     android:layout_marginTop="15dp"
-    android:layout_marginRight="30dp"
+    android:layout_marginRight="0dp"
     android:layout_marginBottom="15dp"
     android:clickable="true"
-    android:foregroundTint="#160D0D"
-    android:onClick="speak"
-    android:soundEffectsEnabled="true"
-    app:cardBackgroundColor="#37C1E0"
-    app:cardCornerRadius="20dp"
-    app:layout_scrollEffect="compress">
+    app:cardBackgroundColor="#F46262">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:clickable="true"
+        app:cardBackgroundColor="#F46262"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/img_word"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:padding="10dp"
-            tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txt_word"
-                android:layout_width="80dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:text="Text\nText"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+            <ImageView
+                android:id="@+id/img_word"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                tools:srcCompat="@tools:sample/avatars" />
 
-            <ImageButton
-                android:id="@+id/btn_examples"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:backgroundTint="#00FFFFFF"
-                android:contentDescription="Examples"
-                app:srcCompat="@drawable/ic_stars" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/txt_word"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Text\nText"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+                <ImageButton
+                    android:id="@+id/btn_examples"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#00FFFFFF"
+                    android:contentDescription="Examples"
+                    app:srcCompat="@drawable/ic_stars" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

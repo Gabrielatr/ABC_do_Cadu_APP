@@ -18,6 +18,9 @@
             android:name=".CategoryActivity"
             android:exported="false" />
         <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".WordsActivity"
             android:exported="false"
             android:theme="@style/Theme.ABCdoCadu" />
