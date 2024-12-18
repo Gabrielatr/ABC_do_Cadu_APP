@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/sky"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    style="@style/Background">
 
     <ImageView
         android:id="@+id/img_cloud1"
@@ -16,6 +16,19 @@
         android:layout_marginTop="25dp"
         android:contentDescription="@string/Desc_cloud"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_cloud" />
+
+    <ImageView
+        android:id="@+id/img_cloud"
+        android:layout_width="@dimen/cloud_width"
+        android:layout_height="@dimen/cloud_height"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="176dp"
+        android:contentDescription="@string/Desc_cloud"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.743"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_cloud" />
@@ -38,12 +51,12 @@
         android:id="@+id/txt_intro"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="176dp"
         android:text="@string/Intro_main"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textColor="@color/app_green"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -52,9 +65,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="150dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="104dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/papagaio_aponta" />
 
@@ -67,5 +81,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/right" />
+
+    <Switch
+        android:id="@+id/switch3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="changeTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
