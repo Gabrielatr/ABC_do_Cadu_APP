@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/sky"
-    tools:context=".CategoryActivity">
+    tools:context=".WordsActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -21,10 +21,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/btn_category"
+        android:id="@+id/btn_home"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="redirectToHome"
         app:layout_constraintBottom_toTopOf="@+id/RecyclerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -73,7 +74,7 @@
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/RecyclerView"
-        app:layout_constraintStart_toEndOf="@+id/btn_category"
+        app:layout_constraintStart_toEndOf="@+id/btn_home"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView

@@ -18,26 +18,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_cloud" />
+        app:srcCompat="@drawable/ic_cloud" />
 
     <ImageView
         android:id="@+id/img_cloud2"
         android:layout_width="@dimen/cloud_width"
         android:layout_height="@dimen/cloud_height"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="232dp"
         android:contentDescription="@string/Desc_cloud"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_cloud" />
+        app:srcCompat="@drawable/ic_cloud" />
 
     <TextView
         android:id="@+id/txt_intro"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginBottom="200dp"
         android:text="@string/Intro_main"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -58,9 +59,9 @@
         app:srcCompat="@drawable/papagaio_aponta" />
 
     <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/next"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:onClick="nextPage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

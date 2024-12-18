@@ -24,9 +24,8 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         // Identificar as Views que vão apresentar os dados
-        var txt_name: TextView = itemView.findViewById<TextView>(R.id.txt_word)
-        var img: ImageView = itemView.findViewById<ImageView>(R.id.img_word)
-
+        var txt_name: TextView = itemView.findViewById<TextView>(R.id.txt_category)
+        var img: ImageView = itemView.findViewById<ImageView>(R.id.img_category)
     }
 
     // Metodo que cria as novas Views (item)
@@ -34,7 +33,7 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView: View = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.item_category_dict, parent, false)
+            .inflate(R.layout.item_category, parent, false)
         return ViewHolder(itemView)
     }
 

@@ -1,5 +1,6 @@
 package pm.ABCdoCadu
 
+import android.content.Intent
 import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -31,7 +32,7 @@ class WordsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_words)
 
-        // * RecyclerView *
+        /* RecyclerView */
 
         // Layout
         recyclerView = findViewById<RecyclerView>(R.id.RecyclerView)
@@ -43,13 +44,12 @@ class WordsActivity : AppCompatActivity() {
         // Fazer request a API para obter as palavras
         dataFromAPI()
 
-
-        // * TextToSpeech *
+        /* TextToSpeech */
 
         // Inicializa o TextToSpeech
         initTTS()
 
-        // * CAA *
+        /* CAA */
 
     }
 
@@ -66,6 +66,7 @@ class WordsActivity : AppCompatActivity() {
             Request.Method.GET, words_url,
             { response ->
                 try {
+
                     //Obtem as respostas da pesquisa na API
                     val jsonArray = JSONArray(response)
 
@@ -153,6 +154,10 @@ class WordsActivity : AppCompatActivity() {
 
         val recyclerview = view.findViewById<RecyclerView>(R.id.RecyclerView)
         recyclerview.top = 100
+    }
+
+    fun redirectToHome(view: View){
+        startActivity(Intent(this,HomeActivity::class.java))
     }
 
 }

@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    fun login(){
+    fun login(view: View){
 
         //RequestQueue
         val queue = Volley.newRequestQueue(this)

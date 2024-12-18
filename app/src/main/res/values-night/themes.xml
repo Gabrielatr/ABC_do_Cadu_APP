@@ -1,7 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.ABCdoCadu" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.DarkTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:statusBarColor">@color/app_green</item>
+    </style>
+    
+    <style name="Background">
+        <item name="android:background">@color/dark_sky</item>
+    </style>
+
+    <style name="TextColor">
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

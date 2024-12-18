@@ -13,4 +13,5 @@
     <string name="label_email">Email</string>
     <string name="label_pass">Senha</string>
     <string name="input_username">Insira seu nome</string>
+    <string name="ic_back">Voltar ao início</string>
 </resources>

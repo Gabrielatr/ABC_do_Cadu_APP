@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/sky"
+    style="@style/Background"
     tools:context=".HomeActivity">
 
     <ImageView
@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        android:onClick="changeTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,6 +109,7 @@
                 android:layout_height="@dimen/btn_home_height"
                 android:layout_margin="5dp"
                 android:backgroundTint="@color/white"
+                android:onClick="redirectToLetMeGuest"
                 android:text="@string/btn_Adivinha"
                 android:textColor="@color/black"
                 app:icon="@drawable/ic_crystalball"

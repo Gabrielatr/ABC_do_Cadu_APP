@@ -1,6 +1,7 @@
 package pm.ABCdoCadu.model
 
 class Category {
-    lateinit var name: String;
-    lateinit var imgURL: String;
+    var id: Int = 0
+    lateinit var name: String
+    lateinit var imgURL: String
 }

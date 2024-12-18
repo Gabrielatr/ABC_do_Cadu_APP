@@ -18,6 +18,18 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun redirectToDict(view: View){
-        startActivity(Intent(this,CategoryActivity::class.java))
+        startActivity(Intent(this,WordsActivity::class.java))
+    }
+
+    fun redirectToLetMeGuest(view: View){
+        startActivity(Intent(this,LetMeGuestActivity::class.java))
+    }
+
+    fun changeTheme(view: View){
+        if(binding.switch1.isActivated) {
+            setTheme(R.style.Theme_DarkTheme)
+        }else{
+            setTheme(R.style.Theme_LightTheme)
+        }
     }
 }
