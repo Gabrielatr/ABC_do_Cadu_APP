@@ -32,6 +32,8 @@ class WordsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_words)
 
+        val category = intent.getStringExtra("category") ?: ""
+
         /* RecyclerView */
 
         // Layout
@@ -42,7 +44,7 @@ class WordsActivity : AppCompatActivity() {
         words = ArrayList<Word>()
 
         // Fazer request a API para obter as palavras
-        dataFromAPI()
+        dataFromAPI(category)
 
         /* TextToSpeech */
 
@@ -54,10 +56,10 @@ class WordsActivity : AppCompatActivity() {
     }
 
     // API
-    private fun dataFromAPI(){
+    private fun dataFromAPI(cat : String){
         // Inicializar a RequestQueue e definir o URL do pedido
         val queue = Volley.newRequestQueue(this)
-        val words_url = "https://api.arasaac.org/api/pictograms/pt/search/Frutas"
+        val words_url = "https://api.arasaac.org/api/pictograms/pt/search/$cat"
         val images_url = "https://static.arasaac.org/pictograms/"
 
 

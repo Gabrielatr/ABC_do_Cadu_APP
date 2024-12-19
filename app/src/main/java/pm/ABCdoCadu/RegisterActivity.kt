@@ -64,8 +64,8 @@ class RegisterActivity : AppCompatActivity() {
             override fun getParams(): MutableMap<String, String> {
                 val params: MutableMap<String,String> = HashMap()
                 //params["username"] = binding.editUsername.text.toString()
-                params["email"] = binding.editEmail.text.toString()
-                params["password"] = binding.editPassword.text.toString()
+                params["email"] = binding.inputEmail.text.toString()
+                params["password"] = binding.inputPassword.text.toString()
                 return params
             }
         }

@@ -15,10 +15,19 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
     }
 
-    fun redirectToDict(view: View){
-        startActivity(Intent(this,WordsActivity::class.java))
+    fun redirectToCategoriesList(view: View){
+        val intent = Intent(this,CategoryActivity::class.java)
+        intent.putExtra("modo", "lista")
+        startActivity(intent)
+    }
+
+    fun redirectToCaa(view: View){
+        val intent = Intent(this,CategoryActivity::class.java)
+        intent.putExtra("modo", "caa")
+        startActivity(intent)
     }
 
     fun redirectToLetMeGuest(view: View){

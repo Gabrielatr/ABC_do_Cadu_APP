@@ -47,8 +47,8 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         val item: Category = categories.get(position)
         holder.txt_name.setText(item.name)
 
-        Picasso.get()
+        /*Picasso.get()
             .load(item.imgURL)
-            .into(holder.img)
+            .into(holder.img)*/
     }
 }

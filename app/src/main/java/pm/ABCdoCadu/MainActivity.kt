@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun nextPage(view: View){
-        startActivity(Intent(this,BaseActivity::class.java))
+        startActivity(Intent(this,LoginActivity::class.java))
     }
 
     fun changeTheme(view: View){
