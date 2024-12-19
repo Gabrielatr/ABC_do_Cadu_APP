@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "616271785621",
+    "project_id": "abc-do-cadu",
+    "storage_bucket": "abc-do-cadu.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616271785621:android:4628034487970af0ea759c",
+        "android_client_info": {
+          "package_name": "pm.ABCdoCadu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqtYRHaHxDkOjjDIp47oh3w-l9J1MbOro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

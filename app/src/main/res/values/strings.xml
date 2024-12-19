@@ -14,7 +14,47 @@
     <string name="label_pass">Senha</string>
     <string name="input_username">Insira seu nome</string>
     <string name="ic_back">Voltar ao início</string>
-    <string name="label_emailpassword">Autenticaçã</string>
+    <string name="label_emailpassword">Autenticação</string>
     <string name="sign_in">Entrar</string>
+    <string name="generic_signin_fmt">Entre com %s</string>
+    <string name="generic_title_text">OAuth</string>
+    <string name="emailpassword_title_text">Email e senha</string>
+    <string name="emailpassword_status_fmt">Email do utilizador: %1$s (verificado: %2$b)</string>
+    <string name="generic_status_fmt">Utilizador: %s (%s)</string>
+    <string name="generic_label_provider">Provedor:</string>
+    <string name="enroll_mfa">Entrar com MFA</string>
+    <string name="unenroll_mfa">Voltar sem MFA</string>
+    <string name="reload">Recarregar</string>
+    <string name="error_sign_in_failed">O acesso falhou, seja os logs para mais detalhes</string>
+    <string name="multi_factor_signed_out">Você não está logado.</string>
+    <string name="get_custom_token">Obter Token</string>
+    <string name="create_account">Criar conta</string>
+    <string name="send_link">Enviar link</string>
+    <string name="sign_out">Sair</string>
+    <string name="verify_email">Verificar</string>
+    <string name="loading">Carregando...</string>
+    <string name="custom_token">Customizar Token</string>
+    <string name="hint_user_id">ID do utilizador</string>
+    <string name="desc_emailpassword">Utilize um email ou senha para se autenticar com Firebase</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Senha</string>
+    <string name="desc_firebase_lockup">Firebase logo e nome</string>
+    <string name="auth_failed">Erro na autenticação</string>
+    <string name="start_phone_auth">Começar</string>
+    <string name="verify_phone_auth">Verificar</string>
+    <string name="resend_phone_auth">Reenviar</string>
+    <string name="hint_phone_number">Número de celular</string>
+    <string name="hint_verification_code">Código de verificação</string>
+    <string name="status_code_sent">Código enviado</string>
+    <string name="status_verification_failed">Erro na autenticação</string>
+    <string name="status_verification_succeeded">Autenticado com sucesso</string>
+    <string name="status_sign_in_failed">Erro na autenticação</string>
+    <string name="instant_validation">validação instantanea</string>
+    <string name="firebase_status_fmt" translatable="false">Firebase UID: %s</string>
+    <string name="firebase_user_management">Firebase - Gestão de utilizador</string>
+    <string name="signed_in">Entrar</string>
+    <string name="signed_out">Sair</string>
+    <string name="token_null" translatable="false">Token: null</string>
+    <string name="btn_register">Cadastre-se</string>
 
 </resources>

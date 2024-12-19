@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cadu\'s ABC</string>
-    <string name="Intro_main"><b>Hello!</b>My name is Cadu!</string>
+    <string name="Intro_main"><b>Hello!</b>\n\nMy name is Cadu!</string>
     <string name="Input_password">Password</string>
     <string name="Input_email">Email</string>
     <string name="Btn_login">Log in</string>
@@ -27,7 +27,6 @@
     <string name="custom_token">Custom Token</string>
     <string name="signed_in">Signed In</string>
     <string name="signed_out">Signed Out</string>
-    <string name="token_null">Token: null</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="desc_firebase_lockup">Firebase logo and name</string>
@@ -43,7 +42,6 @@
     <string name="status_sign_in_failed">Sign-in failed</string>
     <string name="instant_validation">(instant validation)</string>
 
-    <string name="firebase_status_fmt">Firebase UID: %s</string>
     <string name="firebase_user_management">Firebase User Management</string>
 
     <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>

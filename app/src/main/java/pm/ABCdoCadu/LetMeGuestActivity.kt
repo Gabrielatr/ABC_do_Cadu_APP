@@ -10,8 +10,6 @@ import androidx.core.view.WindowInsetsCompat
 
 class LetMeGuestActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
