@@ -1,12 +1,16 @@
 package pm.ABCdoCadu
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import pm.ABCdoCadu.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
 
     private val binding by lazy {
         ActivityHomeBinding.inflate(layoutInflater)
@@ -40,5 +44,14 @@ class HomeActivity : AppCompatActivity() {
         }else{
             setTheme(R.style.Theme_LightTheme)
         }
+    }
+
+    fun signOut(view: View) {
+        val sharedPreferences = this.getSharedPreferences("pmLogin", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("login", false)
+        editor.apply()
+
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 }

@@ -250,7 +250,6 @@ class LoginActivity : AppCompatActivity() {
         private const val TAG = "EmailPassword"
     }
 
-
     private fun setProgressBar(bar: ProgressBar) {
         progressBar = bar
     }

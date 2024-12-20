@@ -140,4 +140,15 @@
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:srcCompat="@drawable/ic_tree" />
 
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        android:onClick="signOut"
+        android:tint="#FF0000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_notification_clear_all" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
