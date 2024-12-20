@@ -16,6 +16,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:onClick="speak"
         app:cardBackgroundColor="#F46262"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +31,7 @@
 
             <ImageView
                 android:id="@+id/img_word"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -45,6 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="8dp"
                     android:text="Text\nText"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />

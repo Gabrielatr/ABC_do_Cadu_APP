@@ -25,7 +25,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:backgroundTint="#00FFFFFF"
-        android:onClick="redirectToHome"
+        android:onClick="goBack"
         app:layout_constraintBottom_toTopOf="@+id/RecyclerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

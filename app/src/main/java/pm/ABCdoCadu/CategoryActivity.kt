@@ -29,6 +29,7 @@ class CategoryActivity : AppCompatActivity() {
     lateinit var categories: java.util.ArrayList<Category>
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: CategoryAdapter
+    var viewMod: Boolean = false
 
     private val binding by lazy {
         ActivityCategoryBinding.inflate(layoutInflater)
@@ -42,7 +43,7 @@ class CategoryActivity : AppCompatActivity() {
         val modo = intent.getStringExtra("modo")
 
         if (modo == "caa"){
-            openCAA(null)
+            changeMod(binding.btnCAA3)
         }
 
         recyclerView = findViewById<RecyclerView>(R.id.CategoriesView)
@@ -160,21 +161,25 @@ class CategoryActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun openCAA(view: View?){
+    fun changeMod(view: View){
 
-        //Altera a visibilidade
-        binding.LinearLayoutCAA.visibility = VISIBLE
+        if(viewMod){
+            binding.LinearLayoutCAA.visibility = INVISIBLE
+            binding.btnCAA3.setImageResource(R.drawable.ic_caa)
+        }else {
+            binding.LinearLayoutCAA.visibility = VISIBLE
+            binding.btnCAA3.setImageResource(R.drawable.ic_dict)
+        }
+
 
         // Obtem as constraints do recyclerview categoria
-        val constraintLayout = findViewById<ConstraintLayout>(R.id.CategoriesView)
+        /*val constraintLayout = findViewById<ConstraintLayout>(R.id.CategoriesView)
         val constraintSet = ConstraintSet()
-        constraintSet.clone(constraintLayout)
+        constraintSet.clone(constraintLayout)*/
 
         // Altera as constraints e adiciona o campo do CAA
-        constraintSet.connect(R.id.CategoriesView, ConstraintSet.TOP, R.id.Linear_layout_CAA, ConstraintSet.TOP, 0)
+        //constraintSet.connect(R.id.CategoriesView, ConstraintSet.TOP, R.id.Linear_layout_CAA, ConstraintSet.TOP, 0)
 
-        //Altera a imagem
-        binding.btnCAA3.setImageResource(R.drawable.ic_dict)
 
         //Altera a função
         /*binding.btnCAA3.setOnClickListener{
@@ -183,27 +188,6 @@ class CategoryActivity : AppCompatActivity() {
 
     }
 
-    fun closeCAA(view: View?){
-
-        //Altera a visibilidade
-        binding.LinearLayoutCAA.visibility = INVISIBLE
-
-        // Obtem as constraints do recyclerview categoria
-        val constraintLayout = findViewById<ConstraintLayout>(R.id.CategoriesView)
-        val constraintSet = ConstraintSet()
-        constraintSet.clone(constraintLayout)
-
-        // Altera as constraints e remove o campo do CAA
-        constraintSet.connect(R.id.CategoriesView, ConstraintSet.TOP, R.id.toolbar3, ConstraintSet.TOP, 0)
-
-        //Altera a imagem
-        binding.btnCAA3.setImageResource(R.drawable.ic_caa)
-
-        //Altera a função
-        /*binding.btnCAA3.setOnClickListener{
-            openCAA(view)
-        }*/
-    }
 
     fun redirectToHome(view: View){
         val intent = Intent(this, HomeActivity::class.java)

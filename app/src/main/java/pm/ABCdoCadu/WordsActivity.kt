@@ -51,7 +51,6 @@ class WordsActivity : AppCompatActivity() {
         // Inicializa o TextToSpeech
         initTTS()
 
-        /* CAA */
 
     }
 
@@ -110,11 +109,9 @@ class WordsActivity : AppCompatActivity() {
 
     // TTS
     private fun initTTS() {
-        Toast.makeText(this, "Inicializando TTS", Toast.LENGTH_SHORT).show()
         textToSpeech = TextToSpeech(this){
             status ->
                 if(status == TextToSpeech.SUCCESS) {
-                    Toast.makeText(this, "Definindo linguagem", Toast.LENGTH_SHORT).show()
 
                     val result = textToSpeech.setLanguage(Locale("pt", "BR"))
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
@@ -129,7 +126,6 @@ class WordsActivity : AppCompatActivity() {
 
     fun speak(view: View) {
         val text = view.findViewById<TextView>(R.id.txt_word).text.toString()
-        Toast.makeText(this, "Speakando : $text", Toast.LENGTH_SHORT).show()
 
         textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
@@ -143,23 +139,9 @@ class WordsActivity : AppCompatActivity() {
     }
 
 
-    // CAA
 
-    fun openCAA(view: View) {
-        // Alterar imagem do botão para voltar
-        val imgButton = view.findViewById<ImageButton>(R.id.btn_CAA)
-        imgButton.setImageIcon(Icon.createWithResource(this, R.drawable.ic_back))
-
-        //Abrir campo
-        val caa = view.findViewById<LinearLayout>(R.id.Linear_layout_CAA)
-        caa.visibility = View.VISIBLE
-
-        val recyclerview = view.findViewById<RecyclerView>(R.id.RecyclerView)
-        recyclerview.top = 100
-    }
-
-    fun redirectToHome(view: View){
-        startActivity(Intent(this,HomeActivity::class.java))
+    fun goBack(view: View){
+        startActivity(Intent(this,CategoryActivity::class.java))
     }
 
 }

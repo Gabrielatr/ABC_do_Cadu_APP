@@ -56,6 +56,14 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
     }
 
+    fun holdLogin(){
+        if (binding.checkBox.isChecked) {
+            getSharedPreferences("pmLogin", Context.MODE_PRIVATE)
+                .edit()
+                .putBoolean("login",true)
+                .apply()
+        }
+    }
     // Login - Firebase
 
     public override fun onStart() {
@@ -99,6 +107,7 @@ class LoginActivity : AppCompatActivity() {
 
                 hideProgressBar()
             }
+        holdLogin()
     }
 
     private fun signIn(email: String, password: String) {
@@ -135,9 +144,15 @@ class LoginActivity : AppCompatActivity() {
                 }
                 hideProgressBar()
             }
+        holdLogin()
     }
 
     private fun signOut() {
+        val sharedPreferences = this.getSharedPreferences("pmLogin", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("login", false)
+        editor.apply()
+
         auth.signOut()
         updateUI(null)
     }
@@ -174,10 +189,8 @@ class LoginActivity : AppCompatActivity() {
         auth.currentUser!!.reload().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 updateUI(auth.currentUser)
-                Toast.makeText(this, "Reload successful!", Toast.LENGTH_SHORT).show()
             } else {
                 Log.e(TAG, "reload", task.exception)
-                Toast.makeText(this, "Failed to reload user.", Toast.LENGTH_SHORT).show()
             }
         }
     }

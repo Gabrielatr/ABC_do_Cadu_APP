@@ -8,7 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="redirectToHome"
-    style="@style/Background">
+    style="@style/Background"
+    tools:context=".CategoryActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
@@ -53,7 +54,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:backgroundTint="#00FFFFFF"
-            android:onClick="openCAA"
+            android:onClick="changeMod"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_caa" />
     </LinearLayout>

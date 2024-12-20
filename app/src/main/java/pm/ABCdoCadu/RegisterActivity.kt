@@ -40,13 +40,13 @@ class RegisterActivity : AppCompatActivity() {
                 if (response == "OK") {
 
                     //If checkbox is checked, save login in SharedPreference
-                    if (binding.checkBox.isChecked) {
+                    /*if (binding.checkBox.isChecked) {
                         getSharedPreferences("pmLogin", Context.MODE_PRIVATE)
                             .edit()
                             .putBoolean("login",true)
                             .apply()
                         msg += " + SAVE"
-                    }
+                    }*/
 
                     Toast.makeText(this, "Login efetuado", Toast.LENGTH_SHORT).show()
 
