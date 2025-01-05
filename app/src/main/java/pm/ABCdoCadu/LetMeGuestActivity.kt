@@ -20,6 +20,17 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import java.util.Locale
+import android.Manifest
+import android.widget.ImageView
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.squareup.picasso.Picasso
+import org.json.JSONArray
+import org.json.JSONException
+import pm.ABCdoCadu.adapter.WordsAdapter
+import pm.ABCdoCadu.model.Word
+
 
 class LetMeGuestActivity : AppCompatActivity() {
 
@@ -56,6 +67,47 @@ class LetMeGuestActivity : AppCompatActivity() {
         }
     }
 
+    fun changeContent(spokenText : String){
+
+        // TextView
+        findViewById<TextView>(R.id.txt_recognizedText).text = spokenText
+
+        // Image
+
+        // Inicializar a RequestQueue e definir o URL do pedido
+        val queue = Volley.newRequestQueue(this)
+        val word_url = "https://api.arasaac.org/api/pictograms/pt/search/$spokenText"
+        val images_url = "https://static.arasaac.org/pictograms/"
+
+
+        // Solicitar uma string de resposta a um pedido por URL
+        val stringRequest = StringRequest(
+            Request.Method.GET, word_url,
+            { response ->
+                try {
+                    //Obtem as respostas da pesquisa na API
+                    val jsonArray = JSONArray(response)
+
+                    //Para cada resposta obtem o seu id, nome e descrição
+                    val element = jsonArray.getJSONObject(0)
+                    val id = element.getInt("_id")
+                    val imgURL = images_url + "/" + id + "/" + id + "_300.png"
+
+                    val holder = findViewById<ImageView>(R.id.img_recognized)
+                    Picasso.get()
+                        .load(imgURL)
+                        .into(holder)
+
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            },
+            { Toast.makeText(this, "Erro", Toast.LENGTH_SHORT).show() })
+
+        // Adicionar o pedido à RequestQueue.
+        queue.add(stringRequest)
+
+    }
     fun recognize(){
         // Inicializa o SpeechRecognizer
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
@@ -68,9 +120,9 @@ class LetMeGuestActivity : AppCompatActivity() {
         val button = findViewById<ImageButton>(R.id.btn_micro)
 
         button.setOnClickListener {
-            /*if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 1)
-            } else {*/
+            } else {
                 speechRecognizer.setRecognitionListener(object : RecognitionListener {
                     override fun onReadyForSpeech(params: Bundle?) {
                         Toast.makeText(this@LetMeGuestActivity, "Fale agora...", Toast.LENGTH_SHORT)
@@ -97,13 +149,19 @@ class LetMeGuestActivity : AppCompatActivity() {
                             results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                         if (matches != null && matches.isNotEmpty()) {
                             val spokenText = matches[0]
+
+                            //Notifica o que foi reconhecido
                             Toast.makeText(
                                 this@LetMeGuestActivity,
                                 "Você disse: $spokenText",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            findViewById<TextView>(R.id.txt_recognizedText).text = spokenText
-                            speak(spokenText) // Fala o que foi reconhecido
+
+                            //Apresenta o que foi reconhecido
+                            changeContent(spokenText)
+
+                            // Fala o que foi reconhecido
+                            speak(spokenText)
                         }
                     }
 
@@ -112,7 +170,7 @@ class LetMeGuestActivity : AppCompatActivity() {
                     override fun onEvent(eventType: Int, params: Bundle?) {}
                 })
                 speechRecognizer.startListening(intent)
-
+            }
         }
     }
 

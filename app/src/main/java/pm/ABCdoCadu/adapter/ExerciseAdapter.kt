@@ -8,22 +8,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import pm.ABCdoCadu.R
-import pm.ABCdoCadu.model.Word
+import pm.ABCdoCadu.model.Exercise
 
-class WordsAdapter : RecyclerView.Adapter<WordsAdapter.ViewHolder> {
+class ExerciseAdapter(categories: ArrayList<Exercise>) :
+    RecyclerView.Adapter<ExerciseAdapter.ViewHolder>() {
 
     // Definição do construtor do Apdater e da lista dos objetos com os dados
-    private var words: ArrayList<Word>
-
-    constructor(words: ArrayList<Word>) {
-        this.words = words
-    }
+    private var exercises: ArrayList<Exercise> = categories
 
     // Definição do Holder
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         // Identificar as Views que vão apresentar os dados
-        var txt_name: TextView = itemView.findViewById<TextView>(R.id.txt_word)
+        var txt_name: TextView = itemView.findViewById<TextView>(R.id.txtExerciseTitle)
         var img: ImageView = itemView.findViewById<ImageView>(R.id.imgExercise)
     }
 
@@ -32,19 +29,19 @@ class WordsAdapter : RecyclerView.Adapter<WordsAdapter.ViewHolder> {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView: View = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.item_word, parent, false)
+            .inflate(R.layout.item_exercise, parent, false)
         return ViewHolder(itemView)
     }
 
     // Metodo que devolve a dimensão do conjunto de dados
     override fun getItemCount(): Int {
-        return words.size
+        return exercises.size
     }
 
     // Metodo que renderiza cada item na RecyclerView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item: Word = words.get(position)
-        holder.txt_name.setText(item.name)
+        val item: Exercise = exercises.get(position)
+        holder.txt_name.text = item.title
 
         Picasso.get()
             .load(item.imgURL)

@@ -44,7 +44,7 @@ class WordsActivity : AppCompatActivity() {
         words = ArrayList<Word>()
 
         // Fazer request a API para obter as palavras
-        dataFromAPI(category)
+        getDataFromAPI(category)
 
         /* TextToSpeech */
 
@@ -55,7 +55,7 @@ class WordsActivity : AppCompatActivity() {
     }
 
     // API
-    private fun dataFromAPI(cat : String){
+    private fun getDataFromAPI(cat : String){
         // Inicializar a RequestQueue e definir o URL do pedido
         val queue = Volley.newRequestQueue(this)
         val words_url = "https://api.arasaac.org/api/pictograms/pt/search/$cat"
@@ -76,7 +76,6 @@ class WordsActivity : AppCompatActivity() {
                         val word = jsonArray.getJSONObject(i)
                         val id = word.getInt("_id")
                         val keywords = word.getJSONArray("keywords")
-
 
                         val w: Word = Word()
                         w.imgURL = images_url + "/" + id + "/" + id + "_300.png"

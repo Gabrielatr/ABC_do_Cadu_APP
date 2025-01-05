@@ -95,6 +95,7 @@
                 android:layout_height="@dimen/btn_home_height"
                 android:layout_margin="5dp"
                 android:backgroundTint="@color/white"
+                android:onClick="redirectToExercises"
                 android:text="Jogar"
                 android:textColor="@color/black"
                 android:textColorLink="@color/black"

@@ -38,6 +38,10 @@ class HomeActivity : AppCompatActivity() {
         startActivity(Intent(this,LetMeGuestActivity::class.java))
     }
 
+    fun redirectToExercises(view: View){
+        startActivity(Intent(this, ExerciseActivity::class.java))
+    }
+
     fun changeTheme(view: View){
         if(binding.switch1.isActivated) {
             setTheme(R.style.Theme_DarkTheme)

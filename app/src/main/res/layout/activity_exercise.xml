@@ -2,17 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
-
-    android:id="@+id/coordinatorLayout"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="redirectToHome"
-    style="@style/Background"
-    tools:context=".CategoryActivity">
+    tools:context=".ExerciseActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar3"
+        android:id="@+id/toolbarExercise"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="#00FFFFFF"
@@ -26,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbarExercise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar3">
@@ -48,54 +45,16 @@
             android:text="@string/ic_back"
             android:textSize="20sp" />
 
-        <ImageButton
-            android:id="@+id/btn_CAA3"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:backgroundTint="#00FFFFFF"
-            android:onClick="changeMod"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_caa" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/Linear_layout_CAA"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:background="#FFFFFF"
-        android:orientation="horizontal"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3">
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/right" />
-
-        <ImageButton
-            android:id="@+id/btn_speak"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/baseline_audiotrack_24" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/CategoriesView"
-        android:layout_width="wrap_content"
+        android:id="@+id/ExerciseRecyclerView"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layoutManager="GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3"
-        app:spanCount="2"
-        tools:layout_conversion_absoluteHeight="924dp"
-        tools:layout_conversion_absoluteWidth="411dp"
-        tools:listitem="@layout/item_category" />
-
+        app:layout_constraintTop_toBottomOf="@+id/toolbarExercise"
+        tools:listitem="@layout/item_exercise" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
