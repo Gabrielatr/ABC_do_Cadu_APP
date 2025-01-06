@@ -8,14 +8,14 @@
     android:layout_marginTop="15dp"
     android:layout_marginRight="0dp"
     android:layout_marginBottom="15dp"
-    android:clickable="true"
     app:cardBackgroundColor="#F46262">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
-        android:onClick="onClickExercise"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:clickable="true"
             app:cardBackgroundColor="#F46262"
             app:cardCornerRadius="250dp"
             app:contentPadding="10dp">

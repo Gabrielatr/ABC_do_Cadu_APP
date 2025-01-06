@@ -1,5 +1,7 @@
 package pm.ABCdoCadu.adapter
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import pm.ABCdoCadu.R
 import pm.ABCdoCadu.model.Category
-import pm.ABCdoCadu.model.Word
+
 
 class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
@@ -50,5 +52,13 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         Picasso.get()
             .load(item.imgURL)
             .into(holder.img)
+
+        holder.itemView.setOnClickListener { v ->
+            Log.d("Msg", v.)
+            val context = v.context
+            val intent = Intent(context, WordsAdapter::class.java)
+            intent.putExtra("category", item.name)
+            context.startActivity(intent)
+        }
     }
 }

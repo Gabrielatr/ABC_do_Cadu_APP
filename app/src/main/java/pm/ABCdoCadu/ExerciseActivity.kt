@@ -129,21 +129,9 @@ class ExerciseActivity : AppCompatActivity() {
 
     private fun displayDataWhenFinished(){
         Log.d("Display Function", "Entrei aqui")
-        for(e in exercises){
-            Log.d("Exercise :", e.id.toString() + " | " + e.title + " | " + e.category + " | " + e.imgURL)
-        }
         // Usar o Adapter para associar os dados encontrados à RecyclerView
-        adapter = ExerciseAdapter(exercises)
+        adapter = ExerciseAdapter(exercises, this)
         recyclerView.setAdapter(adapter)
     }
 
-    fun onClickExercise(view: View) {
-        val txt = view as TextView
-        val id = exercises.find { it.title == txt.text }?.id
-        if (id != null){
-            val intent = Intent(this, QuestionsActivity::class.java)
-            intent.putExtra("exercise_id", id)
-            startActivity(intent)
-        }
-    }
 }

@@ -1,5 +1,8 @@
 package pm.ABCdoCadu.adapter
 
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,10 +10,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import pm.ABCdoCadu.QuestionsActivity
 import pm.ABCdoCadu.R
 import pm.ABCdoCadu.model.Exercise
 
-class ExerciseAdapter(categories: ArrayList<Exercise>) :
+class ExerciseAdapter(categories: ArrayList<Exercise>, private val context: Context) :
     RecyclerView.Adapter<ExerciseAdapter.ViewHolder>() {
 
     // Definição do construtor do Apdater e da lista dos objetos com os dados
@@ -46,5 +50,13 @@ class ExerciseAdapter(categories: ArrayList<Exercise>) :
         Picasso.get()
             .load(item.imgURL)
             .into(holder.img)
+
+        // No adapter
+        holder.itemView.setOnClickListener {
+            Log.d("Item clicado: ", item.title)
+            val intent = Intent(context, QuestionsActivity::class.java)
+            intent.putExtra("exercise_id", item.id)
+            context.startActivity(intent)
+        }
     }
 }

@@ -2,46 +2,72 @@ package pm.ABCdoCadu
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ActionProvider.VisibilityListener
+import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.transition.Visibility
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import org.json.JSONException
-import org.json.JSONObject
+import pm.ABCdoCadu.adapter.ExerciseAdapter
+import pm.ABCdoCadu.adapter.QuestionAdapter
+import pm.ABCdoCadu.adapter.TextQuestionAdapter
 import pm.ABCdoCadu.databinding.ActivityCategoryBinding
 import pm.ABCdoCadu.databinding.ActivityQuestionsBinding
-import pm.ABCdoCadu.fragment.MultipleChoiceWithImagesFragment
 import pm.ABCdoCadu.model.Question
-import pm.ABCdoCadu.ui.main.QuestionsFragment
-import java.lang.System.exit
+import pm.ABCdoCadu.`object`.Questions
+
 
 class QuestionsActivity : AppCompatActivity() {
 
-    private lateinit var questions: java.util.ArrayList<Question>
+    private lateinit var questionsList: ArrayList<Question>
+    private var currentPosition : Int = 1
 
+    private val binding by lazy {
+        ActivityQuestionsBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, QuestionsFragment.newInstance())
-                .commitNow()
-        }
-
         val exerciseId = intent.getIntExtra("exercise_id", 0)
-
-        getQuestionsFromAPI(exerciseId)
+        questionsList = Questions.getQuestions(this, exerciseId)
+        Log.d("Numero de perguntas", "${questionsList.size}")
+        setCurrentQuestion()
     }
 
+    private fun setCurrentQuestion(){
+        val question: Question = questionsList[currentPosition - 1]
+
+        // Change the layout according to the type of question
+        val type = question.type_name
+        changeTypeLayout(type, question)
+
+
+    }
+
+    private fun changeTypeLayout(type: String, question : Question){
+        when(type){
+            "Múltipla-escolha com imagens" ->{
+                // Hide the image title
+                binding.txtQuestionTitle.text = question.title
+                binding.imgQuestion.visibility = View.INVISIBLE
+            }
+
+            "Múltipla-escolha com texto" ->
+            {
+                binding.txtQuestionTitle.visibility = View.INVISIBLE
+            }
+        }
+
+        // Hide the image title
+        binding.txtQuestionTitle.text = question.title
+        binding.imgQuestion.visibility = View.INVISIBLE
+
+        // Usar o Adapter para associar os dados encontrados à RecyclerView
+        val adapter = TextQuestionAdapter(questionsList)
+        binding.recyclerViewOptions.setAdapter(adapter)
+    }
+
+
+
+/*
     private fun getQuestionsFromAPI(exerciseId : Int){
 
         // Inicializar a RequestQueue e definir o URL do pedido
@@ -144,8 +170,6 @@ class QuestionsActivity : AppCompatActivity() {
 
         //Load images for title
 
-    }
-
-
+    }*/
 
 }
