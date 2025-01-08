@@ -8,16 +8,16 @@
     android:layout_marginTop="15dp"
     android:layout_marginRight="0dp"
     android:layout_marginBottom="15dp"
-    android:clickable="true"
-    app:cardBackgroundColor="#F46262">
+    android:clickable="false"
+    android:foregroundTint="#000000">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/exerciseCardView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="speak"
-        app:cardBackgroundColor="#F46262"
+        android:clickable="false"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +27,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:foregroundTint="#6F6767"
             android:orientation="vertical">
 
             <ImageView
@@ -39,6 +40,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -48,14 +50,14 @@
                     android:layout_weight="1"
                     android:padding="8dp"
                     android:text="Text\nText"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#000000"
                     android:textSize="20sp" />
 
                 <ImageButton
                     android:id="@+id/btn_examples"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#00FFFFFF"
+                    android:backgroundTint="#98A1ED"
                     android:contentDescription="Examples"
                     app:srcCompat="@drawable/ic_stars" />
             </LinearLayout>

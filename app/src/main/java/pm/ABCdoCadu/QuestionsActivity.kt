@@ -1,14 +1,22 @@
 package pm.ABCdoCadu
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import org.json.JSONException
+import org.json.JSONObject
 import pm.ABCdoCadu.adapter.ExerciseAdapter
-import pm.ABCdoCadu.adapter.QuestionAdapter
 import pm.ABCdoCadu.adapter.TextQuestionAdapter
 import pm.ABCdoCadu.databinding.ActivityCategoryBinding
 import pm.ABCdoCadu.databinding.ActivityQuestionsBinding
+import pm.ABCdoCadu.fragment.MultipleChoiceWithTextFragment
 import pm.ABCdoCadu.model.Question
 import pm.ABCdoCadu.`object`.Questions
 
@@ -17,6 +25,8 @@ class QuestionsActivity : AppCompatActivity() {
 
     private lateinit var questionsList: ArrayList<Question>
     private var currentPosition : Int = 1
+    private lateinit var correctOption: String
+    private lateinit var currentFragment : Fragment
 
     private val binding by lazy {
         ActivityQuestionsBinding.inflate(layoutInflater)
@@ -27,10 +37,61 @@ class QuestionsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_questions)
 
         val exerciseId = intent.getIntExtra("exercise_id", 0)
-        questionsList = Questions.getQuestions(this, exerciseId)
+        fillQuestionsList(exerciseId)
+
         Log.d("Numero de perguntas", "${questionsList.size}")
         setCurrentQuestion()
     }
+
+    private fun fillQuestionsList(idExerciselist: Int){
+
+        // Inicializar a RequestQueue e definir o URL do pedido
+        val queue = Volley.newRequestQueue(this)
+        val url = "https://esan-tesp-ds-paw.web.ua.pt/tesp-ds-g5/projeto/api/question/questions_of_exercise.php?id=$idExerciselist"
+
+        Log.d("** Informação na classe **", "ID do exercicio: $idExerciselist")
+
+        // Solicitar uma string de resposta a um pedido por URL
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            { response ->
+                try {
+
+                    // Faz a leitura do retorno alojado dentro de records
+                    val res = JSONObject(response)
+                    val questionList = res.getJSONArray("records")
+
+                    for (i in 0 until questionList.length()) {
+
+                        // Obtem a categoria
+                        val questionObject = questionList.getJSONObject(i)
+
+                        //Cria o objeto Question
+                        var question: Question = Question()
+
+                        // Atribui as propriedades
+                        question.id = Integer.parseInt(questionObject.getString("id"))
+                        question.title = questionObject.getString("title")
+                        question.type_name = questionObject.getString("type_name")
+                        question.answer_01 = questionObject.getString("answer_01")
+                        question.answer_02 = questionObject.getString("answer_02")
+                        question.answer_03 = questionObject.getString("answer_03")
+                        question.answer_04 = questionObject.getString("answer_04")
+                        question.correct_answer = questionObject.getString("correct_answer")
+
+                        //Adiciona o objeto ao ArrayList
+                        questionsList.add(question)
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            },
+            { Toast.makeText(this, "Erro", Toast.LENGTH_SHORT).show() })
+
+        // Adicionar o pedido à RequestQueue.
+        queue.add(stringRequest)
+    }
+
 
     private fun setCurrentQuestion(){
         val question: Question = questionsList[currentPosition - 1]
@@ -38,33 +99,19 @@ class QuestionsActivity : AppCompatActivity() {
         // Change the layout according to the type of question
         val type = question.type_name
         changeTypeLayout(type, question)
-
-
     }
 
     private fun changeTypeLayout(type: String, question : Question){
         when(type){
-            "Múltipla-escolha com imagens" ->{
-                // Hide the image title
-                binding.txtQuestionTitle.text = question.title
-                binding.imgQuestion.visibility = View.INVISIBLE
-            }
-
-            "Múltipla-escolha com texto" ->
-            {
-                binding.txtQuestionTitle.visibility = View.INVISIBLE
+            "Múltipla-escolha com texto" ->{
+                currentFragment = MultipleChoiceWithTextFragment.newInstance(
+                    question.title, question.answer_01, question.answer_02, question.answer_03, question.answer_04, question.correct_answer)
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, currentFragment)
+                    .commit()
             }
         }
-
-        // Hide the image title
-        binding.txtQuestionTitle.text = question.title
-        binding.imgQuestion.visibility = View.INVISIBLE
-
-        // Usar o Adapter para associar os dados encontrados à RecyclerView
-        val adapter = TextQuestionAdapter(questionsList)
-        binding.recyclerViewOptions.setAdapter(adapter)
     }
-
 
 
 /*

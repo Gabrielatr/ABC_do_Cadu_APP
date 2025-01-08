@@ -3,15 +3,10 @@ package pm.ABCdoCadu.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import pm.ABCdoCadu.R
-import pm.ABCdoCadu.adapter.ExerciseAdapter.ViewHolder
 import pm.ABCdoCadu.model.Question
-import pm.ABCdoCadu.model.Word
 
 class TextQuestionAdapter : RecyclerView.Adapter<TextQuestionAdapter.ViewHolder> {
 
@@ -26,7 +21,7 @@ class TextQuestionAdapter : RecyclerView.Adapter<TextQuestionAdapter.ViewHolder>
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         // Identificar as Views que vão apresentar os dados
-        var txtOption: TextView = itemView.findViewById<TextView>(R.id.txtQuestionOption)
+        var txtOption: TextView = itemView.findViewById<TextView>(R.id.txtOption2)
 
     }
 

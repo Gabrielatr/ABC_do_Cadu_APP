@@ -16,6 +16,9 @@
         android:theme="@style/Theme.ABCdoCadu"
         tools:targetApi="32">
         <activity
+            android:name=".CAAActivity"
+            android:exported="false" />
+        <activity
             android:name=".QuestionsActivity"
             android:exported="false" />
         <activity

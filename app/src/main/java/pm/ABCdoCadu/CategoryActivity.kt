@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -27,13 +28,12 @@ import pm.ABCdoCadu.adapter.ExerciseAdapter
 import pm.ABCdoCadu.databinding.ActivityCategoryBinding
 import pm.ABCdoCadu.model.Category
 
-class CategoryActivity : AppCompatActivity() {
+class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListener {
 
     private lateinit var textToSpeech: TextToSpeech
-    lateinit var categories: java.util.ArrayList<Category>
+    lateinit var categories: ArrayList<Category>
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: CategoryAdapter
-    var viewMod: Boolean = false
 
     private val binding by lazy {
         ActivityCategoryBinding.inflate(layoutInflater)
@@ -43,15 +43,7 @@ class CategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
 
-        // Definir o modo de tela
-        val modo = intent.getStringExtra("modo")
-
-        if (modo == "caa"){
-            changeMod(binding.btnCAA3)
-        }
-
         // Recycler View Content
-
         recyclerView = findViewById<RecyclerView>(R.id.CategoriesView)
         recyclerView.setHasFixedSize(true)
 
@@ -60,6 +52,15 @@ class CategoryActivity : AppCompatActivity() {
 
         getCategoriesFromAPI()
 
+    }
+
+    override fun onCategoryClick(category: String) {
+        Log.d("** Informação **", "Clique na categoria : $category")
+
+        // Inicia a nova Activity e passa o item clicado
+        val intent = Intent(this, WordsActivity::class.java)
+        intent.putExtra("category", category)
+        startActivity(intent)
     }
 
     private fun getCategoriesImagesFromAPI(){
@@ -151,47 +152,15 @@ class CategoryActivity : AppCompatActivity() {
 
     private fun displayDataWhenFinished(){
         // Usar o Adapter para associar os dados encontrados à RecyclerView
-        adapter = CategoryAdapter(categories)
+        adapter = CategoryAdapter(categories, this)
         recyclerView.setAdapter(adapter)
+        Log.d("** Informação **", adapter.itemCount.toString())
     }
-    
-    fun onClickCategory(view: View) {
-        val txt = view as TextView
-        val intent = Intent(this, WordsActivity::class.java)
-        intent.putExtra("category", txt.text)
-        startActivity(intent)
-    }
-
-    fun changeMod(view: View){
-
-        if(viewMod){
-            binding.LinearLayoutCAA.visibility = INVISIBLE
-            binding.btnCAA3.setImageResource(R.drawable.ic_caa)
-        }else {
-            binding.LinearLayoutCAA.visibility = VISIBLE
-            binding.btnCAA3.setImageResource(R.drawable.ic_dict)
-        }
-
-
-        // Obtem as constraints do recyclerview categoria
-        /*val constraintLayout = findViewById<ConstraintLayout>(R.id.CategoriesView)
-        val constraintSet = ConstraintSet()
-        constraintSet.clone(constraintLayout)*/
-
-        // Altera as constraints e adiciona o campo do CAA
-        //constraintSet.connect(R.id.CategoriesView, ConstraintSet.TOP, R.id.Linear_layout_CAA, ConstraintSet.TOP, 0)
-
-
-        //Altera a função
-        /*binding.btnCAA3.setOnClickListener{
-            closeCAA(view)
-        }*/
-
-    }
-
 
     fun redirectToHome(view: View){
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }
+
+
 }

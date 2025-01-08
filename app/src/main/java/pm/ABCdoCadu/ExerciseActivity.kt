@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,9 +17,10 @@ import org.json.JSONObject
 import pm.ABCdoCadu.adapter.ExerciseAdapter
 import pm.ABCdoCadu.model.Exercise
 
-class ExerciseActivity : AppCompatActivity() {
 
-    private lateinit var exercises: java.util.ArrayList<Exercise>
+class ExerciseActivity : AppCompatActivity(), ExerciseAdapter.OnExerciseClickListener {
+
+    private lateinit var exercises: ArrayList<Exercise>
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ExerciseAdapter
 
@@ -28,13 +28,13 @@ class ExerciseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
 
+        // Inicializa o recyclerview
         recyclerView = findViewById<RecyclerView>(R.id.ExerciseRecyclerView)
         recyclerView.setHasFixedSize(true)
         recyclerView.setLayoutManager(LinearLayoutManager(this))
 
-        // Obter a relação de distritos por HTTP
+        // Coleta as informações para a recyclerview
         exercises = ArrayList<Exercise>()
-
         getExercisesFromAPI()
     }
 
@@ -127,11 +127,27 @@ class ExerciseActivity : AppCompatActivity() {
         }
     }
 
+    override fun onExerciseClick(exercise: Exercise) {
+        Log.d("** Informação **", "Clique no exercício : " + exercise.title)
+
+        // Inicia a nova Activity e passa o item clicado
+        val intent = Intent(this, QuestionsActivity::class.java)
+        intent.putExtra("exercise_id", exercise.id)
+        startActivity(intent)
+    }
+
     private fun displayDataWhenFinished(){
-        Log.d("Display Function", "Entrei aqui")
+        Log.d("** Informação **", "A colocar no recyclerview")
         // Usar o Adapter para associar os dados encontrados à RecyclerView
         adapter = ExerciseAdapter(exercises, this)
         recyclerView.setAdapter(adapter)
     }
+
+    fun goToHome(view: View){
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+    }
+
+
 
 }

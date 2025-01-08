@@ -1,6 +1,5 @@
 package pm.ABCdoCadu.adapter
 
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,21 +12,37 @@ import pm.ABCdoCadu.R
 import pm.ABCdoCadu.model.Category
 
 
-class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+class CategoryAdapter(
+    private val categories: ArrayList<Category>,
+    private val categoryClickListener: OnCategoryClickListener
+) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
-    // Definição do construtor do Apdater e da lista dos objetos com os dados
-    private var categories: ArrayList<Category>
-
-    constructor(categories: ArrayList<Category>) {
-        this.categories = categories
+    interface OnCategoryClickListener {
+        fun onCategoryClick(category: String)
     }
 
     // Definição do Holder
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         // Identificar as Views que vão apresentar os dados
-        var txt_name: TextView = itemView.findViewById<TextView>(R.id.txt_category)
-        var img: ImageView = itemView.findViewById<ImageView>(R.id.img_category)
+        var txt_name: TextView = itemView.findViewById<TextView>(R.id.txtCategory)
+        var img: ImageView = itemView.findViewById<ImageView>(R.id.imgCategory)
+
+        // Atribui os valores às Views e adiciona o evento de clique
+        fun bind(category: Category, clickListener: OnCategoryClickListener) {
+            // Atribui o valor do nome
+            txt_name.text = category.name
+
+            // Carrega a imagem
+            Picasso.get()
+                .load(category.imgURL)
+                .into(img)
+
+            // Adiciona o evento de clique na categoria
+            itemView.setOnClickListener {
+                clickListener.onCategoryClick(category.name)
+            }
+        }
     }
 
     // Metodo que cria as novas Views (item)
@@ -46,19 +61,6 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     // Metodo que renderiza cada item na RecyclerView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item: Category = categories.get(position)
-        holder.txt_name.setText(item.name)
-
-        Picasso.get()
-            .load(item.imgURL)
-            .into(holder.img)
-
-        holder.itemView.setOnClickListener { v ->
-            Log.d("Msg", v.)
-            val context = v.context
-            val intent = Intent(context, WordsAdapter::class.java)
-            intent.putExtra("category", item.name)
-            context.startActivity(intent)
-        }
+        holder.bind(categories[position], categoryClickListener)
     }
 }

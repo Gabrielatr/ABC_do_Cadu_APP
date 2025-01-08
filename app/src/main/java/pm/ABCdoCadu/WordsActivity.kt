@@ -4,12 +4,14 @@ import android.content.Intent
 import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -20,7 +22,7 @@ import pm.ABCdoCadu.adapter.WordsAdapter
 import pm.ABCdoCadu.model.Word
 import java.util.Locale
 
-class WordsActivity : AppCompatActivity() {
+class WordsActivity : AppCompatActivity(), WordsAdapter.OnWordClickListener {
 
     private lateinit var textToSpeech: TextToSpeech
     lateinit var words: java.util.ArrayList<Word>
@@ -32,7 +34,8 @@ class WordsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_words)
 
-        val category = intent.getStringExtra("category") ?: ""
+        val category = intent.getStringExtra("category") ?: "Nada"
+        Log.d("** Informação na activity **", category)
 
         /* RecyclerView */
 
@@ -50,7 +53,6 @@ class WordsActivity : AppCompatActivity() {
 
         // Inicializa o TextToSpeech
         initTTS()
-
 
     }
 
@@ -92,7 +94,7 @@ class WordsActivity : AppCompatActivity() {
                     }
 
                     // Usar o Adapter para associar os dados à RecyclerView
-                    adapter = WordsAdapter(words)
+                    adapter = WordsAdapter(words, this)
                     recyclerView.setAdapter(adapter)
 
                 } catch (e: JSONException) {
@@ -104,7 +106,6 @@ class WordsActivity : AppCompatActivity() {
         // Adicionar o pedido à RequestQueue.
         queue.add(stringRequest)
     }
-
 
     // TTS
     private fun initTTS() {
@@ -123,12 +124,6 @@ class WordsActivity : AppCompatActivity() {
         }
     }
 
-    fun speak(view: View) {
-        val text = view.findViewById<TextView>(R.id.txt_word).text.toString()
-
-        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
-    }
-
     override fun onDestroy() {
         if (textToSpeech.isSpeaking) {
             textToSpeech.stop()
@@ -137,10 +132,14 @@ class WordsActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-
-
     fun goBack(view: View){
         startActivity(Intent(this,CategoryActivity::class.java))
+    }
+
+    override fun onWordClick(word: Word) {
+        val text = findViewById<TextView>(R.id.txt_word).text.toString()
+
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
 }

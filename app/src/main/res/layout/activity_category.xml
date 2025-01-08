@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar3">
 
         <ImageButton
-            android:id="@+id/btn_home3"
+            android:id="@+id/btnExerciseGoToHome"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="21dp"
@@ -56,31 +56,6 @@
             android:onClick="changeMod"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_caa" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/Linear_layout_CAA"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:background="#FFFFFF"
-        android:orientation="horizontal"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3">
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/right" />
-
-        <ImageButton
-            android:id="@+id/btn_speak"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/baseline_audiotrack_24" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

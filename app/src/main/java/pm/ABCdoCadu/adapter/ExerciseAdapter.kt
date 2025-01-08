@@ -14,11 +14,14 @@ import pm.ABCdoCadu.QuestionsActivity
 import pm.ABCdoCadu.R
 import pm.ABCdoCadu.model.Exercise
 
-class ExerciseAdapter(categories: ArrayList<Exercise>, private val context: Context) :
+class ExerciseAdapter(
+    private val exercises: ArrayList<Exercise>,
+    private val exerciseClickListener: OnExerciseClickListener) :
     RecyclerView.Adapter<ExerciseAdapter.ViewHolder>() {
 
-    // Definição do construtor do Apdater e da lista dos objetos com os dados
-    private var exercises: ArrayList<Exercise> = categories
+    interface OnExerciseClickListener {
+        fun onExerciseClick(exercise: Exercise)
+    }
 
     // Definição do Holder
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -26,6 +29,22 @@ class ExerciseAdapter(categories: ArrayList<Exercise>, private val context: Cont
         // Identificar as Views que vão apresentar os dados
         var txt_name: TextView = itemView.findViewById<TextView>(R.id.txtExerciseTitle)
         var img: ImageView = itemView.findViewById<ImageView>(R.id.imgExercise)
+
+        // Atribui os valores às Views e adiciona o evento de clique
+        fun bind(item: Exercise, clickListener: OnExerciseClickListener) {
+            // Atribui o valor do nome
+            txt_name.text = item.title
+
+            // Carrega a imagem
+            Picasso.get()
+                .load(item.imgURL)
+                .into(img)
+
+            // Adiciona o evento de clique na categoria
+            itemView.setOnClickListener {
+                clickListener.onExerciseClick(item)
+            }
+        }
     }
 
     // Metodo que cria as novas Views (item)
@@ -44,19 +63,6 @@ class ExerciseAdapter(categories: ArrayList<Exercise>, private val context: Cont
 
     // Metodo que renderiza cada item na RecyclerView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item: Exercise = exercises.get(position)
-        holder.txt_name.text = item.title
-
-        Picasso.get()
-            .load(item.imgURL)
-            .into(holder.img)
-
-        // No adapter
-        holder.itemView.setOnClickListener {
-            Log.d("Item clicado: ", item.title)
-            val intent = Intent(context, QuestionsActivity::class.java)
-            intent.putExtra("exercise_id", item.id)
-            context.startActivity(intent)
-        }
+        holder.bind(exercises[position], exerciseClickListener)
     }
 }

@@ -30,16 +30,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_cloud" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:onClick="changeTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TableLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -147,7 +137,6 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#00FFFFFF"
         android:onClick="signOut"
-        android:tint="#FF0000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_notification_clear_all" />

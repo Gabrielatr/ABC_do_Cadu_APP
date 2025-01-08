@@ -29,8 +29,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun redirectToCaa(view: View){
-        val intent = Intent(this,CategoryActivity::class.java)
-        intent.putExtra("modo", "caa")
+        val intent = Intent(this,CAAActivity::class.java)
         startActivity(intent)
     }
 
@@ -41,7 +40,7 @@ class HomeActivity : AppCompatActivity() {
     fun redirectToExercises(view: View){
         startActivity(Intent(this, ExerciseActivity::class.java))
     }
-
+/*
     fun changeTheme(view: View){
         if(binding.switch1.isActivated) {
             setTheme(R.style.Theme_DarkTheme)
@@ -49,7 +48,7 @@ class HomeActivity : AppCompatActivity() {
             setTheme(R.style.Theme_LightTheme)
         }
     }
-
+*/
     fun signOut(view: View) {
         val sharedPreferences = this.getSharedPreferences("pmLogin", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()

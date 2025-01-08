@@ -8,15 +8,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import pm.ABCdoCadu.R
+import pm.ABCdoCadu.adapter.CategoryAdapter.OnCategoryClickListener
+import pm.ABCdoCadu.model.Category
 import pm.ABCdoCadu.model.Word
 
-class WordsAdapter : RecyclerView.Adapter<WordsAdapter.ViewHolder> {
+class WordsAdapter(
+    private val words: ArrayList<Word>,
+    private val wordClickListener: OnWordClickListener
+) : RecyclerView.Adapter<WordsAdapter.ViewHolder>() {
 
-    // Definição do construtor do Apdater e da lista dos objetos com os dados
-    private var words: ArrayList<Word>
-
-    constructor(words: ArrayList<Word>) {
-        this.words = words
+    interface OnWordClickListener {
+        fun onWordClick(word: Word)
     }
 
     // Definição do Holder
@@ -25,6 +27,22 @@ class WordsAdapter : RecyclerView.Adapter<WordsAdapter.ViewHolder> {
         // Identificar as Views que vão apresentar os dados
         var txt_name: TextView = itemView.findViewById<TextView>(R.id.txt_word)
         var img: ImageView = itemView.findViewById<ImageView>(R.id.imgExercise)
+
+        // Atribui os valores às Views e adiciona o evento de clique
+        fun bind(word: Word, clickListener: OnWordClickListener) {
+            // Atribui o valor do nome
+            txt_name.text = word.name
+
+            // Carrega a imagem
+            Picasso.get()
+                .load(word.imgURL)
+                .into(img)
+
+            // Adiciona o evento de clique na categoria
+            itemView.setOnClickListener {
+                clickListener.onWordClick(word)
+            }
+        }
     }
 
     // Metodo que cria as novas Views (item)
@@ -43,11 +61,6 @@ class WordsAdapter : RecyclerView.Adapter<WordsAdapter.ViewHolder> {
 
     // Metodo que renderiza cada item na RecyclerView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item: Word = words.get(position)
-        holder.txt_name.setText(item.name)
-
-        Picasso.get()
-            .load(item.imgURL)
-            .into(holder.img)
+        holder.bind(words[position], wordClickListener)
     }
 }

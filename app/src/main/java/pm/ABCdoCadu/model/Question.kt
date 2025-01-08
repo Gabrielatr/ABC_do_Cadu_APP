@@ -9,5 +9,5 @@ class Question {
     lateinit var answer_02 : String
     var answer_03 : String = ""
     var answer_04 : String = ""
-    var correct_answer : Int = 1
+    var correct_answer : String = "1"
 }

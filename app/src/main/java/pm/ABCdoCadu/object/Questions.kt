@@ -1,6 +1,7 @@
 package pm.ABCdoCadu.`object`
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -25,6 +26,8 @@ object Questions {
         // Inicializar a RequestQueue e definir o URL do pedido
         val queue = Volley.newRequestQueue(context)
         val url = "https://esan-tesp-ds-paw.web.ua.pt/tesp-ds-g5/projeto/api/question/questions_of_exercise.php?id=$idExerciselist"
+
+        Log.d("** Informação na classe **", "ID do exercicio: $idExerciselist")
 
         // Solicitar uma string de resposta a um pedido por URL
         val stringRequest = StringRequest(
@@ -52,7 +55,7 @@ object Questions {
                         question.answer_02 = questionObject.getString("answer_02")
                         question.answer_03 = questionObject.getString("answer_03")
                         question.answer_04 = questionObject.getString("answer_04")
-                        question.correct_answer = Integer.parseInt(questionObject.getString("correct_answer"))
+                        question.correct_answer = questionObject.getString("correct_answer")
 
                         //Adiciona o objeto ao ArrayList
                         questionsList.add(question)
