@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.util.Patterns.EMAIL_ADDRESS
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
@@ -33,7 +34,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        
 
         setProgressBar(binding.progressBarLogin)
 
@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
     }
 
-    fun holdLogin(){
+    private fun holdLogin(){
         if (binding.checkBox.isChecked) {
             getSharedPreferences("pmLogin", Context.MODE_PRIVATE)
                 .edit()
@@ -200,13 +200,22 @@ class LoginActivity : AppCompatActivity() {
 
         val email = binding.inputEmail.text.toString()
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "E-mail required.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.errorEmptyEmail, Toast.LENGTH_SHORT).show()
+            valid = false
+        }
+
+        if(!EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(this, R.string.errorInvalidEmail, Toast.LENGTH_SHORT).show()
             valid = false
         }
 
         val password = binding.inputPassword.text.toString()
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Password required.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.errorEmptyPassword, Toast.LENGTH_SHORT).show()
+            valid = false
+        }
+        if(password.length < 6){
+            Toast.makeText(this, R.string.errorInvalidPassword, Toast.LENGTH_SHORT).show()
             valid = false
         }
 
@@ -217,31 +226,16 @@ class LoginActivity : AppCompatActivity() {
         hideProgressBar()
         if (user != null) {
 
-            Log.d("Login status: ",getString(
-                R.string.emailpassword_status_fmt,
-                user.email,
-                user.isEmailVerified
-            ))
+            Log.d(
+                "Login status: ", getString(
+                    R.string.emailpassword_status_fmt,
+                    user.email,
+                    user.isEmailVerified
+                )
+            )
 
             Log.d("Firebase status: ", getString(R.string.firebase_status_fmt, user.uid))
 
-            //binding.emailPasswordButtons.visibility = View.GONE
-            //binding.emailPasswordFields.visibility = View.GONE
-            //binding.signedInButtons.visibility = View.VISIBLE
-
-            /*if (user.isEmailVerified) {
-                binding.verifyEmailButton.visibility = View.GONE
-            } else {
-                binding.verifyEmailButton.visibility = View.VISIBLE
-            }*/
-        } else {
-            /*
-            binding.status.setText(R.string.signed_out)
-            binding.detail.text = null
-
-            binding.emailPasswordButtons.visibility = View.VISIBLE
-            binding.emailPasswordFields.visibility = View.VISIBLE
-            binding.signedInButtons.visibility = View.GONE*/
         }
     }
 

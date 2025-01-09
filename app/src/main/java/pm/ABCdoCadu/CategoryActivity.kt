@@ -2,38 +2,30 @@ package pm.ABCdoCadu
 
 import android.content.Intent
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.squareup.picasso.Picasso
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import pm.ABCdoCadu.adapter.CategoryAdapter
-import pm.ABCdoCadu.adapter.ExerciseAdapter
 import pm.ABCdoCadu.databinding.ActivityCategoryBinding
 import pm.ABCdoCadu.model.Category
 
 class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListener {
 
-    private lateinit var textToSpeech: TextToSpeech
     lateinit var categories: ArrayList<Category>
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: CategoryAdapter
+    private lateinit var progressBar: ProgressBar
 
     private val binding by lazy {
         ActivityCategoryBinding.inflate(layoutInflater)
@@ -47,11 +39,13 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLis
         recyclerView = findViewById<RecyclerView>(R.id.CategoriesView)
         recyclerView.setHasFixedSize(true)
 
+        setProgressBar(binding.progressBarCategory)
+        progressBar.visibility = VISIBLE
+
         // Obter a relação de distritos por HTTP
         categories = ArrayList<Category>()
 
         getCategoriesFromAPI()
-
     }
 
     override fun onCategoryClick(category: String) {
@@ -95,10 +89,12 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLis
                         Log.d("Exercise Image: ", it.name + " " + it.imgURL)
 
                         if (it == categories.last()){
-                            displayDataWhenFinished()
+                            hideProgressBar()           // Esconde a barra de progresso
+                            displayDataWhenFinished()   // Carrega os dados
                         }
 
                     } catch (e: JSONException) {
+                        Log.d("** Error **", e.toString())
                         e.printStackTrace()
                     }
                 },
@@ -118,7 +114,6 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLis
         val stringRequest = StringRequest(
             Request.Method.GET, url,
             { response ->
-                Log.d("A pegar as categorias: ","Entrei")
                 try {
                     // Faz a leitura do retorno alojado dentro de records
                     val res = JSONObject(response)
@@ -139,10 +134,11 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLis
                         //Adiciona o objeto ao ArrayList
                         categories.add(d)
                     }
+                    getCategoriesImagesFromAPI()
                 } catch (e: JSONException) {
+                    Log.d("** Error **", e.toString())
                     e.printStackTrace()
                 }
-                getCategoriesImagesFromAPI()
             },
             { Toast.makeText(this, "Erro", Toast.LENGTH_SHORT).show() })
 
@@ -162,5 +158,18 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLis
         startActivity(intent)
     }
 
+    private fun setProgressBar(bar: ProgressBar) {
+        Log.d("Progress Bar: ", "Atribuiu aqui $bar")
+        progressBar = bar
+    }
+
+    private fun hideProgressBar() {
+        progressBar.visibility = INVISIBLE
+    }
+
+    public override fun onStop() {
+        super.onStop()
+        hideProgressBar()
+    }
 
 }

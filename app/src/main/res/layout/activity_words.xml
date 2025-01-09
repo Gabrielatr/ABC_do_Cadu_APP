@@ -35,23 +35,12 @@
         android:id="@+id/txt_categorias"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Categorias"
+        android:text="@string/btnGoBackToCategories"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/RecyclerView"
         app:layout_constraintStart_toEndOf="@+id/btn_home"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btn_CAA"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:backgroundTint="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/RecyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_caa" />
 
     <LinearLayout
         android:id="@+id/Linear_layout_CAA"

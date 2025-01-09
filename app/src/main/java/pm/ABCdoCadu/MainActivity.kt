@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this,LoginActivity::class.java))
     }
 
-    fun changeTheme(view: View){
+    /*fun changeTheme(view: View){
         if(view.isEnabled){
             Toast.makeText(this, "Dark mode", Toast.LENGTH_SHORT).show()
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -31,5 +31,5 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Light mode", Toast.LENGTH_SHORT).show()
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-    }
+    }*/
 }

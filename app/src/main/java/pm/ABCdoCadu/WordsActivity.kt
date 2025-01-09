@@ -1,17 +1,12 @@
 package pm.ABCdoCadu
 
 import android.content.Intent
-import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -82,6 +77,7 @@ class WordsActivity : AppCompatActivity(), WordsAdapter.OnWordClickListener {
                         val w: Word = Word()
                         w.imgURL = images_url + "/" + id + "/" + id + "_300.png"
 
+                        //Para cada palavra obtem o seu nome e descrição (se disponível)
                         for (k in 0 until keywords.length()) {
                             val wordKeys = keywords.getJSONObject(k)
                             w.name = wordKeys.getString("keyword")
@@ -90,6 +86,8 @@ class WordsActivity : AppCompatActivity(), WordsAdapter.OnWordClickListener {
                                 w.description = wordKeys.getString("meaning")
                             }
                         }
+
+                        //Adiciona o objeto ao ArrayList
                         words.add(w)
                     }
 
@@ -98,6 +96,7 @@ class WordsActivity : AppCompatActivity(), WordsAdapter.OnWordClickListener {
                     recyclerView.setAdapter(adapter)
 
                 } catch (e: JSONException) {
+                    Log.d("** Error **", e.toString())
                     e.printStackTrace()
                 }
             },
@@ -137,9 +136,7 @@ class WordsActivity : AppCompatActivity(), WordsAdapter.OnWordClickListener {
     }
 
     override fun onWordClick(word: Word) {
-        val text = findViewById<TextView>(R.id.txt_word).text.toString()
-
-        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
+        textToSpeech.speak(word.name, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
 }

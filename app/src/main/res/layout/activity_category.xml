@@ -7,7 +7,6 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="redirectToHome"
     style="@style/Background"
     tools:context=".CategoryActivity">
 
@@ -48,14 +47,6 @@
             android:text="@string/ic_back"
             android:textSize="20sp" />
 
-        <ImageButton
-            android:id="@+id/btn_CAA3"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:backgroundTint="#00FFFFFF"
-            android:onClick="changeMod"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_caa" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -71,6 +62,18 @@
         tools:layout_conversion_absoluteHeight="924dp"
         tools:layout_conversion_absoluteWidth="411dp"
         tools:listitem="@layout/item_category" />
+
+    <ProgressBar
+        android:id="@+id/progressBarCategory"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/CategoriesView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

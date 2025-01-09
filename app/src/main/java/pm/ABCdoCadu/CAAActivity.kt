@@ -32,12 +32,12 @@ class CAAActivity : AppCompatActivity(), WordsAdapter.OnWordClickListener {
     private val sentimentos = listOf("feliz", "triste", "cansado", "com fome", "com sede", "com calor", "com frio", "com sono")
     private val cores = listOf("vermelho", "azul", "amarelo", "verde", "laranja", "roxo", "preto", "branco", "cinzento", "castanho", "cor de rosa", "lilás")
     private val necessidades = listOf("fazer xixi", "fazer coco", "tomar banho", "escovar os dentes", "pentear o cabelo", "vestir", "despir", "dormir", "comer", "beber")
-    private val animais = listOf("Leão", "Papagaio", "Cão", "Gato", "Elefante", "Girafa", "Macaco", "Pato", "Peixe", "Tigre", "Urso", "Zebra", "Dinossauro", "Coelho")
+    private val animais = listOf("Leão", "Cão", "Gato", "Elefante", "Girafa", "Macaco", "Pato", "Peixe", "Tigre", "Urso", "Zebra", "Dinossauro", "Coelho")
     private val familia = listOf("mãe", "pai", "irmã", "irmão", "avó", "avô", "tio", "tia", "primo", "prima", "sobrinho", "sobrinha", "filho", "filha")
     private val desejo = listOf("comer", "beber", "dormir", "ver TV", "ouvir música", "ler", "passear", "correr", "pular", "brincar", "ir à escola", "desenhar", "pintar", "praia", "cinema", "piscina", "andar de carro", "andar de bicicleta", "zoológico")
     private val comida = listOf("Chocolate", "Bolacha", "Pão", "Leite", "Água", "Sumo", "Sopa", "Peixe", "Carne", "Fruta", "Legumes", "Bolos", "Gelado", "Pizza", "Hambúrguer", "Batatas fritas", "Ovos", "Arroz", "Massa", "Pão de forma", "Iogurte", "Queijo", "Fiambre", "Manteiga", "Azeite", "Sal", "Açúcar", "Café", "Chá", "Cereais" )
     private val frutas = listOf("Maçã", "Banana", "Uva", "Cereja", "Abacate", "Laranja", "Pêra", "Pêssego", "Ananás", "Melancia", "Morango", "Kiwi", "Manga", "Maracujá", "Limão", "Framboesa", "Mirtilo", "Amora", "Romã", "Tangerina", "Coco", "Melão", "Ameixa", "Nectarina", "Clementina", "Figo", "Papaia", "Damasco", "Goiaba", "Toranja", "Tâmara", "Carambola", "Pitanga", "Jabuticaba", "Acerola", "Caju", "Graviola", "Jaca", "Mamão", "Uvaia", "Açaí", "Cajá")
-    private val objetos = listOf("Telemóvel", "Tablet", "Computador", "Rato", "Teclado", "Monitor", "Caneta", "Lápis", "Borracha", "Caderno", "Livro", "Revista", "Jornal", "Óculos", "Relógio", "Anel", "Colar", "Brincos", "Pulseira", "Mala", "Carteira", "Chave", "Mochila", "Guarda-chuva", "Copo", "Prato", "Garfo", "Faca", "Colher", "Talheres", "Panela", "Frigideira", "Forno", "Fogão", "Microondas", "Máquina de lavar roupa", "Máquina de lavar loiça", "Aspirador", "Vassoura", "Esfregona", "Balde", "Pá", "Escova", "Pente", "Tesoura", "Lanterna", "Fósforos", "Vela", "Lâmpada", "Candeeiro", "Interruptor", "Tomada", "Ficha", "Cabo", "Carregador", "Bateria", "Pilhas", "Comando", "Televisão", "Rádio", "Coluna", "Auscultadores", "Microfone")
+    private val objetos = listOf("Telemóvel", "Tablet", "Computador", "Teclado", "Monitor", "Caneta", "Lápis", "Borracha", "Caderno", "Livro", "Revista", "Jornal", "Óculos", "Relógio", "Anel", "Brincos", "Pulseira", "Mala", "Carteira", "Chave", "Mochila", "Guarda-chuva", "Copo", "Prato", "Garfo", "Faca", "Colher", "Talheres", "Panela", "Frigideira", "Forno", "Fogão", "Microondas", "Máquina de lavar loiça", "Aspirador", "Vassoura", "Esfregona", "Balde", "Pá", "Escova", "Pente", "Tesoura", "Lanterna", "Fósforos", "Vela", "Lâmpada", "Candeeiro", "Interruptor", "Tomada", "Cabo", "Carregador", "Pilhas", "Comando", "Televisão", "Rádio", "Auscultadores", "Microfone")
     private val wordsCAA = ArrayList<Word>()
     private var phase: List<String> = listOf("")
     private var wordCategory = "opcoes"
@@ -55,13 +55,16 @@ class CAAActivity : AppCompatActivity(), WordsAdapter.OnWordClickListener {
         // Inicializa o TextToSpeech
         initTTS()
 
+        /* RecyclerView */
         recyclerView = findViewById<RecyclerView>(R.id.CAAView)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.setHasFixedSize(true)
 
+        /* Inicializa a frase */
         txtPhase = findViewById<TextView>(R.id.txtPhase)
         txtPhase.text = phase.joinToString(separator = " ")
 
+        /* Apresenta a primeira categoria*/
         changeCategory()
     }
 
@@ -103,14 +106,18 @@ class CAAActivity : AppCompatActivity(), WordsAdapter.OnWordClickListener {
                         // Adiciona na listagem de palavras que vão para a RecyclerView
                         wordsCAA.add(w)
 
+                        // Se for a última palavra, carrega a RecyclerView
                         if (w == wordsCAA.last()) {
                             uploadToRecyclerView()
                         }
                     } catch (e: JSONException) {
                         e.printStackTrace()
+                        Log.d("** Erro **", e.toString())
                     }
                 },
-                { Toast.makeText(this, "Erro", Toast.LENGTH_SHORT).show() })
+                {
+                    Toast.makeText(this, R.string.errorConnectionAPI, Toast.LENGTH_SHORT).show()
+                })
 
             // Adicionar o pedido à RequestQueue.
             queue.add(stringRequest)
@@ -192,8 +199,7 @@ class CAAActivity : AppCompatActivity(), WordsAdapter.OnWordClickListener {
                     loadData(objetos)        // Carrega a lista
                 }
                 else -> {
-                    Log.d("** Informação **", "Fim das categorias")
-                    Toast.makeText(this, "Parabéns! Você ao final da categoria!", Toast.LENGTH_SHORT).show()
+                    // Caso não seja nenhuma das categorias, termina a aplicação
                     wordsCAA.clear()
                     uploadToRecyclerView()
                 }

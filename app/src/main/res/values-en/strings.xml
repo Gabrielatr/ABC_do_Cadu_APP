@@ -61,5 +61,24 @@
 
     <string name="error_sign_in_failed">Sign in failed, see logs for details.</string>
     <string name="multi_factor_signed_out">You are not signed in. To use this sample, first navigate to the Email/Password example to sign in and then return here to enroll in multi-factor auth.</string>
+    <string name="btn_register">Register</string>
+    <string name="btnHomeDict">Dictionary</string>
+    <string name="btnHomePlayGame">Play</string>
+    <string name="btnHomeCAA">AAC</string>
+    <string name="btnGoBackToCategories">Categories</string>
+    <string name="errorEmptyPassword">Password required.</string>
+    <string name="errorEmptyEmail">E-mail required.</string>
+    <string name="errorEmptyUsername">Username required.</string>
+    <string name="errorInvalidEmail">Invalid e-mail.</string>
+    <string name="errorInvalidPassword">Invalid e-mail. Password must have at least 6 characters.</string>
+    <string name="speakNow">Speak now...</string>
+    <string name="errorInitTTS">Failed to load TTS</string>
+    <string name="errorSpeakTTS">Failed to speak</string>
+    <string name="errorStopTTS">Failed to stop TTS</string>
+    <string name="errorShutdownTTS">Failed to shutdown TTS</string>
+    <string name="errorSetLanguageTTS">Failed to set TTS language</string>
+    <string name="errorOnTTS">Failed to recognize word</string>
+    <string name="errorConnectionAPI">Connection to the API failed</string>
+    <string name="errorGetResponseAPI">Failed to get response from API</string>
 
 </resources>

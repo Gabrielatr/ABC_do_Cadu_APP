@@ -56,7 +56,30 @@
     <string name="signed_out">Sair</string>
     <string name="token_null" translatable="false">Token: null</string>
     <string name="btn_register">Cadastre-se</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btnHomeDict">Dicionário</string>
+    <string name="btnHomePlayGame">Jogar</string>
+    <string name="btnHomeCAA">CAA</string>
+    <string name="btnGoBackToCategories">Categorias</string>
+
+    /* Form */
+    <string name="errorEmptyPassword">Senha inválida! Preencha o campo.</string>
+    <string name="errorEmptyEmail">Email inválido! Preencha o campo.</string>
+    <string name="errorEmptyUsername">Nome inválido! Preencha o campo.</string>
+    <string name="errorInvalidEmail">Email inválido! Preencha o campo corretamente.</string>
+    <string name="errorInvalidPassword">Senha inválida! A senha deve ser maior que 6 dígitos.</string>
+
+    /* TTS */
+    <string name="speakNow">Fale agora...</string>
+    <string name="errorInitTTS">Erro ao iniciar TTS</string>
+    <string name="errorSpeakTTS">Erro ao falar</string>
+    <string name="errorStopTTS">Erro ao parar</string>
+    <string name="errorShutdownTTS">Erro ao desligar</string>
+    <string name="errorSetLanguageTTS">Erro ao definir idioma</string>
+    <string name="errorOnTTS">Erro ao reconhecer fala</string>
+
+    /* API Connection */
+
+    <string name="errorConnectionAPI">Erro ao conectar com a API</string>
+    <string name="errorGetResponseAPI">Erro ao obter resposta da API</string>
 
 </resources>

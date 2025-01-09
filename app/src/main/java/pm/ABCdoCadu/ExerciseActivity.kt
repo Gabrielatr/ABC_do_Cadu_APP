@@ -72,6 +72,7 @@ class ExerciseActivity : AppCompatActivity(), ExerciseAdapter.OnExerciseClickLis
                     getExercisesImagesFromAPI()
 
                 } catch (e: JSONException) {
+                    Log.d("** Error **", e.toString())
                     e.printStackTrace()
                 }
             },
@@ -117,6 +118,7 @@ class ExerciseActivity : AppCompatActivity(), ExerciseAdapter.OnExerciseClickLis
                         }
 
                     } catch (e: JSONException) {
+                        Log.d("** Error **", e.toString())
                         e.printStackTrace()
                     }
                 },

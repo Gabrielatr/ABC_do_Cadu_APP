@@ -8,7 +8,6 @@ import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -16,11 +15,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import java.util.Locale
 import android.Manifest
+import android.util.Log
 import android.widget.ImageView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -28,8 +25,6 @@ import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import org.json.JSONArray
 import org.json.JSONException
-import pm.ABCdoCadu.adapter.WordsAdapter
-import pm.ABCdoCadu.model.Word
 
 
 class LetMeGuestActivity : AppCompatActivity() {
@@ -58,11 +53,11 @@ class LetMeGuestActivity : AppCompatActivity() {
 
                     val result = textToSpeech.setLanguage(Locale("pt", "BR"))
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                        Toast.makeText(this, "Erro na linguagem", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.errorSetLanguageTTS, Toast.LENGTH_SHORT).show()
                     }
                 }
                 else {
-                    Toast.makeText(this, "Erro ao iniciar TTS", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, R.string.errorInitTTS, Toast.LENGTH_SHORT).show()
                 }
         }
     }
@@ -93,22 +88,25 @@ class LetMeGuestActivity : AppCompatActivity() {
                     val id = element.getInt("_id")
                     val imgURL = images_url + "/" + id + "/" + id + "_300.png"
 
+                    Log.d("** Image URL: **", imgURL)
+
                     val holder = findViewById<ImageView>(R.id.img_recognized)
                     Picasso.get()
                         .load(imgURL)
                         .into(holder)
 
                 } catch (e: JSONException) {
+                    Log.d("** Error **", e.toString())
                     e.printStackTrace()
                 }
             },
-            { Toast.makeText(this, "Erro", Toast.LENGTH_SHORT).show() })
+            { Toast.makeText(this, R.string.errorGetResponseAPI, Toast.LENGTH_SHORT).show() })
 
         // Adicionar o pedido à RequestQueue.
         queue.add(stringRequest)
 
     }
-    fun recognize(){
+    private fun recognize(){
         // Inicializa o SpeechRecognizer
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
@@ -125,7 +123,7 @@ class LetMeGuestActivity : AppCompatActivity() {
             } else {
                 speechRecognizer.setRecognitionListener(object : RecognitionListener {
                     override fun onReadyForSpeech(params: Bundle?) {
-                        Toast.makeText(this@LetMeGuestActivity, "Fale agora...", Toast.LENGTH_SHORT)
+                        Toast.makeText(this@LetMeGuestActivity, R.string.speakNow, Toast.LENGTH_SHORT)
                             .show()
                     }
 
@@ -140,7 +138,7 @@ class LetMeGuestActivity : AppCompatActivity() {
                     override fun onEndOfSpeech() {}
 
                     override fun onError(error: Int) {
-                        Toast.makeText(this@LetMeGuestActivity, "Erro: $error", Toast.LENGTH_SHORT)
+                        Toast.makeText(this@LetMeGuestActivity, R.string.errorOnTTS, Toast.LENGTH_SHORT)
                             .show()
                     }
 
@@ -153,7 +151,7 @@ class LetMeGuestActivity : AppCompatActivity() {
                             //Notifica o que foi reconhecido
                             Toast.makeText(
                                 this@LetMeGuestActivity,
-                                "Você disse: $spokenText",
+                                "$spokenText",
                                 Toast.LENGTH_SHORT
                             ).show()
 
@@ -163,6 +161,8 @@ class LetMeGuestActivity : AppCompatActivity() {
                             // Fala o que foi reconhecido
                             speak(spokenText)
                         }
+                        Toast.makeText(this@LetMeGuestActivity, R.string.errorOnTTS, Toast.LENGTH_SHORT)
+                            .show()
                     }
 
                     override fun onPartialResults(partialResults: Bundle?) {}
