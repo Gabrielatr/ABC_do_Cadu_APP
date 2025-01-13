@@ -25,11 +25,6 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLis
     lateinit var categories: ArrayList<Category>
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: CategoryAdapter
-    private lateinit var progressBar: ProgressBar
-
-    private val binding by lazy {
-        ActivityCategoryBinding.inflate(layoutInflater)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +33,6 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLis
         // Recycler View Content
         recyclerView = findViewById<RecyclerView>(R.id.CategoriesView)
         recyclerView.setHasFixedSize(true)
-
-        setProgressBar(binding.progressBarCategory)
-        progressBar.visibility = VISIBLE
 
         // Obter a relação de distritos por HTTP
         categories = ArrayList<Category>()
@@ -89,7 +81,6 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLis
                         Log.d("Exercise Image: ", it.name + " " + it.imgURL)
 
                         if (it == categories.last()){
-                            hideProgressBar()           // Esconde a barra de progresso
                             displayDataWhenFinished()   // Carrega os dados
                         }
 
@@ -158,18 +149,5 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickLis
         startActivity(intent)
     }
 
-    private fun setProgressBar(bar: ProgressBar) {
-        Log.d("Progress Bar: ", "Atribuiu aqui $bar")
-        progressBar = bar
-    }
-
-    private fun hideProgressBar() {
-        progressBar.visibility = INVISIBLE
-    }
-
-    public override fun onStop() {
-        super.onStop()
-        hideProgressBar()
-    }
 
 }

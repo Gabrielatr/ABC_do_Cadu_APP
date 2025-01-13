@@ -1,21 +1,25 @@
 package pm.ABCdoCadu.fragment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.selects.select
 import pm.ABCdoCadu.R
 
-private const val IMG_TITLE = "param1"
-private const val OPT_ONE = "param2"
-private const val OPT_TWO = "param3"
-private const val OPT_TREE = ""
-private const val OPT_FOUR = ""
+private const val IMG_TITLE = "param0"
+private const val OPT_ONE = "param1"
+private const val OPT_TWO = "param2"
+private const val OPT_TREE = "param3"
+private const val OPT_FOUR = "param4"
 private const val CORRECT_OPT = "1"
 
 
@@ -25,15 +29,13 @@ class MultipleChoiceWithTextFragment : Fragment() {
     private var optTwo: String? = null
     private var optTree: String? = null
     private var optFour: String? = null
-    private var correctOpt: String? = "1"
+    private var correctOpt: String = "1"
     lateinit var selectedOption : String
-    var correctOption: Boolean = false
+    private lateinit var dataPasser: OnDataPass
 
     interface OnDataPass {
-        fun onDataPass(data: String, correctOption: Boolean)
+        fun onDataPass(selectedOption: String, correctOption: String)
     }
-
-    private lateinit var dataPasser: OnDataPass
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -48,7 +50,7 @@ class MultipleChoiceWithTextFragment : Fragment() {
             optTwo = it.getString(OPT_TWO)
             optTree = it.getString(OPT_TREE)
             optFour = it.getString(OPT_FOUR)
-            correctOpt = it.getString(CORRECT_OPT)
+            correctOpt = it.getString(CORRECT_OPT).toString()
         }
     }
 
@@ -60,45 +62,85 @@ class MultipleChoiceWithTextFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_multiple_choice_with_text, container, false)
     }
 
+    @SuppressLint("ResourceAsColor", "UseCompatLoadingForDrawables")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Separa as views
+        val img = view.findViewById<ImageView>(R.id.imgTextQuestion)
+        val txtOption1 = view.findViewById<TextView>(R.id.txtOption1)
+        val txtOption2 = view.findViewById<TextView>(R.id.txtOption2)
+        val txtOption3 = view.findViewById<TextView>(R.id.txtOption3)
+        val txtOption4 = view.findViewById<TextView>(R.id.txtOption4)
+        val btnCheckAnswer = view.findViewById<Button>(R.id.btnTextQuestion)
+
         // Substitui o conteúdo das views pelo valor dos parametros
-        view.findViewById<ImageView>(R.id.imgTextQuestion).setImageResource(R.drawable.ic_launcher_background)
-        view.findViewById<ImageView>(R.id.imgTextQuestion).contentDescription = imgTitle
-        view.findViewById<TextView>(R.id.txtOption1).text = optOne
-        view.findViewById<TextView>(R.id.txtOption2).text = optTwo
+        img.contentDescription = imgTitle
+
+        // Carrega a imagem
+        Picasso.get()
+            .load(imgTitle)
+            .into(img)
+
+        txtOption1.text = optOne
+        txtOption2.text = optTwo
 
         // Verifica se a opção 3 e 4 existem, atribui o texto e torna a opção visível
         if(optTree != "") {
-            view.findViewById<TextView>(R.id.txtOption3).text = optTree
-            view.findViewById<TextView>(R.id.txtOption3).visibility = View.VISIBLE
+            txtOption3.text = optTree
+            Log.d("optTree", optTree.toString())
+            Log.d("txtOption3", txtOption3.text.toString())
+            txtOption3.visibility = View.VISIBLE
         }
         if(optFour != "") {
-            view.findViewById<TextView>(R.id.txtOption4).text = optFour
-            view.findViewById<TextView>(R.id.txtOption4).visibility = View.VISIBLE
+            txtOption4.text = optFour
+            txtOption4.visibility = View.VISIBLE
         }
 
         // Verifica qual a opção correta e atribui o valor ao campo correto
         when(correctOpt) {
-            "1" -> view.findViewById<TextView>(R.id.txtOption1).contentDescription = "correto"
-            "2" -> view.findViewById<TextView>(R.id.txtOption2).contentDescription = "correto"
-            "3" -> view.findViewById<TextView>(R.id.txtOption3).contentDescription = "correto"
-            "4" -> view.findViewById<TextView>(R.id.txtOption4).contentDescription = "correto"
+            "1" -> txtOption1.contentDescription = "correto"
+            "2" -> txtOption2.contentDescription = "correto"
+            "3" -> txtOption3.contentDescription = "correto"
+            "4" -> txtOption4.contentDescription = "correto"
         }
 
-    }
-
-    fun selectedOption(view: View) {
-        val itemSelected = view.findViewById<TextView>(view.id)
-        selectedOption = itemSelected.text.toString()
-        if (itemSelected.contentDescription == "correto") {
-            correctOption = true
+        // Adiciona o evento de clique nas opções
+        txtOption1.setOnClickListener {
+            selectedOption = "1"
+            txtOption1.setTextColor(resources.getColor(R.color.app_purple, null));
+            txtOption2.setTextColor(R.color.black)
+            txtOption3.setTextColor(R.color.black)
+            txtOption4.setTextColor(R.color.black)
+        }
+        txtOption2.setOnClickListener {
+            selectedOption = "2"
+            txtOption1.setTextColor(R.color.black)
+            txtOption2.setTextColor(resources.getColor(R.color.app_purple, null));
+            txtOption3.setTextColor(R.color.black)
+            txtOption4.setTextColor(R.color.black)
+        }
+        txtOption3.setOnClickListener {
+            selectedOption = "3"
+            txtOption1.setTextColor(R.color.black)
+            txtOption2.setTextColor(R.color.black)
+            txtOption3.setTextColor(resources.getColor(R.color.app_purple, null));
+            txtOption4.setTextColor(R.color.black)
+        }
+        txtOption4.setOnClickListener {
+            selectedOption = "4"
+            txtOption1.setTextColor(R.color.black)
+            txtOption2.setTextColor(R.color.black)
+            txtOption3.setTextColor(R.color.black)
+            txtOption4.setTextColor(resources.getColor(R.color.app_purple, null));
+        }
+        btnCheckAnswer.setOnClickListener {
+            checkAnswer(view)
         }
     }
 
-    fun checkAnswer(view: View) {
-        dataPasser.onDataPass(selectedOption, correctOption)
+    private fun checkAnswer(view: View) {
+        dataPasser.onDataPass(selectedOption, correctOpt)
     }
 
     companion object {

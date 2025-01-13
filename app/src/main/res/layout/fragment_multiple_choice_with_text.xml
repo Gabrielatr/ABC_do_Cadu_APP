@@ -24,6 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
+            android:minWidth="150dp"
+            android:minHeight="160dp"
             app:layout_constraintBottom_toBottomOf="@+id/view3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,12 +53,8 @@
 
                     <TextView
                         android:id="@+id/txtOption1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="50dp"
-                        android:minHeight="50dp"
-                        android:onClick="selectedOption"
-                        android:padding="10dp" />
+                        style="@style/btnTextOption"
+                        android:textColor="@color/black" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -68,12 +66,8 @@
 
                     <TextView
                         android:id="@+id/txtOption2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="50dp"
-                        android:minHeight="50dp"
-                        android:onClick="selectedOption"
-                        android:padding="10dp" />
+                        style="@style/btnTextOption"
+                        android:textColor="@color/black" />
                 </androidx.cardview.widget.CardView>
             </TableRow>
 
@@ -91,12 +85,8 @@
 
                     <TextView
                         android:id="@+id/txtOption3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="50dp"
-                        android:minHeight="50dp"
-                        android:onClick="selectedOption"
-                        android:padding="10dp" />
+                        style="@style/btnTextOption"
+                        android:textColor="@color/black" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -108,12 +98,8 @@
 
                     <TextView
                         android:id="@+id/txtOption4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="50dp"
-                        android:minHeight="50dp"
-                        android:onClick="selectedOption"
-                        android:padding="10dp" />
+                        style="@style/btnTextOption"
+                        android:textColor="@color/black" />
                 </androidx.cardview.widget.CardView>
             </TableRow>
 
@@ -124,8 +110,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="150dp"
-            android:onClick="checkAnswer"
-            android:text="Button"
+            android:text="@string/btnQuestion"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

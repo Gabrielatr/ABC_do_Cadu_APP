@@ -80,5 +80,6 @@
     <string name="errorOnTTS">Failed to recognize word</string>
     <string name="errorConnectionAPI">Connection to the API failed</string>
     <string name="errorGetResponseAPI">Failed to get response from API</string>
+    <string name="btnQuestion">Continuar</string>
 
 </resources>

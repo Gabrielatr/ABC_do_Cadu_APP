@@ -63,17 +63,5 @@
         tools:layout_conversion_absoluteWidth="411dp"
         tools:listitem="@layout/item_category" />
 
-    <ProgressBar
-        android:id="@+id/progressBarCategory"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/CategoriesView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
