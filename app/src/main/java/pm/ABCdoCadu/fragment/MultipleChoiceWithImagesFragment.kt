@@ -22,7 +22,7 @@ private const val OPT_FOUR = "param4"
 private const val CORRECT_OPT = "1"
 
 
-class MultipleChoiceWithTextFragment : Fragment() {
+class MultipleChoiceWithImagesFragment : Fragment() {
     private var imgTitle: String? = null
     private var optOne: String? = null
     private var optTwo: String? = null
@@ -66,72 +66,59 @@ class MultipleChoiceWithTextFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Separa as views
-        val img = view.findViewById<ImageView>(R.id.imgTextQuestion)
-        val txtOption1 = view.findViewById<TextView>(R.id.txtOption1)
-        val txtOption2 = view.findViewById<TextView>(R.id.txtOption2)
-        val txtOption3 = view.findViewById<TextView>(R.id.txtOption3)
-        val txtOption4 = view.findViewById<TextView>(R.id.txtOption4)
+        val title = view.findViewById<TextView>(R.id.txtImageTitle)
+        val btnOption1 = view.findViewById<ImageView>(R.id.txtOption1)
+        val btnOption2 = view.findViewById<ImageView>(R.id.txtOption2)
+        val btnOption3 = view.findViewById<ImageView>(R.id.txtOption3)
+        val btnOption4 = view.findViewById<ImageView>(R.id.txtOption4)
         val btnCheckAnswer = view.findViewById<Button>(R.id.btnImageQuestion)
 
         // Substitui o conteúdo das views pelo valor dos parametros
-        img.contentDescription = imgTitle
+        title.text = imgTitle
 
-        // Carrega a imagem
+        // Carrega as imagens
         Picasso.get()
             .load(imgTitle)
-            .into(img)
+            .into(btnOption1)
+        Picasso.get()
+            .load(imgTitle)
+            .into(btnOption2)
 
-        txtOption1.text = optOne
-        txtOption2.text = optTwo
 
         // Verifica se a opção 3 e 4 existem, atribui o texto e torna a opção visível
         if(optTree != "") {
-            txtOption3.text = optTree
-            Log.d("optTree", optTree.toString())
-            Log.d("txtOption3", txtOption3.text.toString())
-            txtOption3.visibility = View.VISIBLE
+            Picasso.get()
+                .load(imgTitle)
+                .into(btnOption3)
+            btnOption3.visibility = View.VISIBLE
         }
         if(optFour != "") {
-            txtOption4.text = optFour
-            txtOption4.visibility = View.VISIBLE
+            Picasso.get()
+                .load(imgTitle)
+                .into(btnOption4)
+            btnOption4.visibility = View.VISIBLE
         }
 
         // Verifica qual a opção correta e atribui o valor ao campo correto
         when(correctOpt) {
-            "1" -> txtOption1.contentDescription = "correto"
-            "2" -> txtOption2.contentDescription = "correto"
-            "3" -> txtOption3.contentDescription = "correto"
-            "4" -> txtOption4.contentDescription = "correto"
+            "1" -> btnOption1.contentDescription = "correto"
+            "2" -> btnOption2.contentDescription = "correto"
+            "3" -> btnOption3.contentDescription = "correto"
+            "4" -> btnOption4.contentDescription = "correto"
         }
 
         // Adiciona o evento de clique nas opções
-        txtOption1.setOnClickListener {
+        btnOption1.setOnClickListener {
             selectedOption = "1"
-            txtOption1.setTextColor(resources.getColor(R.color.app_purple, null));
-            txtOption2.setTextColor(R.color.black)
-            txtOption3.setTextColor(R.color.black)
-            txtOption4.setTextColor(R.color.black)
         }
-        txtOption2.setOnClickListener {
+        btnOption2.setOnClickListener {
             selectedOption = "2"
-            txtOption1.setTextColor(R.color.black)
-            txtOption2.setTextColor(resources.getColor(R.color.app_purple, null));
-            txtOption3.setTextColor(R.color.black)
-            txtOption4.setTextColor(R.color.black)
         }
-        txtOption3.setOnClickListener {
+        btnOption3.setOnClickListener {
             selectedOption = "3"
-            txtOption1.setTextColor(R.color.black)
-            txtOption2.setTextColor(R.color.black)
-            txtOption3.setTextColor(resources.getColor(R.color.app_purple, null));
-            txtOption4.setTextColor(R.color.black)
         }
-        txtOption4.setOnClickListener {
+        btnOption4.setOnClickListener {
             selectedOption = "4"
-            txtOption1.setTextColor(R.color.black)
-            txtOption2.setTextColor(R.color.black)
-            txtOption3.setTextColor(R.color.black)
-            txtOption4.setTextColor(resources.getColor(R.color.app_purple, null));
         }
         btnCheckAnswer.setOnClickListener {
             checkAnswer(view)

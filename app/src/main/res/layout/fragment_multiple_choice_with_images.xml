@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.MultipleChoiceWithTextFragment">
+    tools:context=".fragment.MultipleChoiceWithImagesFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,17 +19,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imgTextQuestion"
+        <TextView
+            android:id="@+id/txtImageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:minWidth="150dp"
-            android:minHeight="160dp"
+            android:text="TextView"
+            android:textSize="25dp"
             app:layout_constraintBottom_toBottomOf="@+id/view3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintEnd_toEndOf="@+id/view3"
+            app:layout_constraintStart_toStartOf="@+id/view3"
+            app:layout_constraintTop_toTopOf="@+id/view3" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -44,31 +43,17 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
 
-                <androidx.cardview.widget.CardView
+                <ImageButton
+                    android:id="@+id/imageButton9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="20dp">
+                    tools:src="@tools:sample/avatars" />
 
-                    <TextView
-                        android:id="@+id/txtOption1"
-                        style="@style/btnTextOption"
-                        android:textColor="@color/black" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
+                <ImageButton
+                    android:id="@+id/imageButton10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="20dp">
-
-                    <TextView
-                        android:id="@+id/txtOption2"
-                        style="@style/btnTextOption"
-                        android:textColor="@color/black" />
-                </androidx.cardview.widget.CardView>
+                    tools:src="@tools:sample/avatars" />
             </TableRow>
 
             <TableRow
@@ -76,31 +61,19 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
 
-                <androidx.cardview.widget.CardView
+                <ImageButton
+                    android:id="@+id/imageButton11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="20dp">
+                    android:visibility="invisible"
+                    tools:src="@tools:sample/avatars" />
 
-                    <TextView
-                        android:id="@+id/txtOption3"
-                        style="@style/btnTextOption"
-                        android:textColor="@color/black" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
+                <ImageButton
+                    android:id="@+id/imageButton12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="20dp">
-
-                    <TextView
-                        android:id="@+id/txtOption4"
-                        style="@style/btnTextOption"
-                        android:textColor="@color/black" />
-                </androidx.cardview.widget.CardView>
+                    android:visibility="invisible"
+                    tools:src="@tools:sample/avatars" />
             </TableRow>
 
         </TableLayout>
@@ -115,6 +88,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

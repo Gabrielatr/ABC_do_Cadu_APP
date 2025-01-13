@@ -19,6 +19,7 @@ import pm.ABCdoCadu.adapter.TextQuestionAdapter
 import pm.ABCdoCadu.databinding.ActivityCategoryBinding
 import pm.ABCdoCadu.databinding.ActivityQuestionsBinding
 import pm.ABCdoCadu.fragment.MultipleChoiceWithTextFragment
+import pm.ABCdoCadu.fragment.ResultsFragment
 import pm.ABCdoCadu.model.Question
 import pm.ABCdoCadu.`object`.Questions
 
@@ -29,6 +30,7 @@ class QuestionsActivity : AppCompatActivity(), MultipleChoiceWithTextFragment.On
     private var currentPosition : Int = 1
     private lateinit var correctOption: String
     private lateinit var currentFragment : Fragment
+    var results: ArrayList<Boolean> = ArrayList()
 
     private val binding by lazy {
         ActivityQuestionsBinding.inflate(layoutInflater)
@@ -110,7 +112,7 @@ class QuestionsActivity : AppCompatActivity(), MultipleChoiceWithTextFragment.On
         getImageURL(question.title, question.type_name, question)
     }
 
-    private fun changeTypeLayout(type: String, question : Question, imageURL: String){
+    private fun changeTypeLayout(type: String, question : Question, imageURL: String = "", images: List<String> = listOf()){
         when(type){
             "Múltipla-escolha com texto" ->{
                 currentFragment = MultipleChoiceWithTextFragment.newInstance(
@@ -119,6 +121,7 @@ class QuestionsActivity : AppCompatActivity(), MultipleChoiceWithTextFragment.On
                     .replace(R.id.fragmentContainerView, currentFragment)
                     .commit()
             }
+
         }
         if (type != "Múltipla-escolha com texto"){
             currentPosition++
@@ -167,67 +170,42 @@ class QuestionsActivity : AppCompatActivity(), MultipleChoiceWithTextFragment.On
         queue.add(stringRequest)
     }
 
-    override fun onDataPass(selectedOption: String, correctOption: String) {
-        if (selectedOption == correctOption){
-            Toast.makeText(this, "Resposta correta", Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(this, "Resposta errada", Toast.LENGTH_SHORT).show()
-        }
-    }
+    private fun getImagesURL(images : List<String>, type: String, question: Question){
+        // Inicializar a RequestQueue e definir o URL do pedido
+        val queue = Volley.newRequestQueue(this)
+        val searchURL = "https://api.arasaac.org/api/pictograms/pt/search/"
+        val imagesAPIURL = "https://static.arasaac.org/pictograms/"
 
-    fun redirectToExercises(view: View){
-        val intent = Intent(this, ExerciseActivity::class.java)
-        startActivity(intent)
-    }
+        // Define a variável das urls das imagens
+        var imagesURL : List<String> = listOf()
 
+        for (image in images){
+            // Define a URL para pesquisa
+            var titleURL = searchURL + image
 
-    /*
-        private fun getQuestionsFromAPI(exerciseId : Int){
-
-            // Inicializar a RequestQueue e definir o URL do pedido
-            val queue = Volley.newRequestQueue(this)
-            val url = "https://esan-tesp-ds-paw.web.ua.pt/tesp-ds-g5/projeto/api/question/questions_of_exercise.php?id=$exerciseId"
-
-            // Solicitar uma string de resposta a um pedido por URL
+            // Faz a requisição para encontrar a url da questão
             val stringRequest = StringRequest(
-                Request.Method.GET, url,
+                Request.Method.GET, titleURL,
                 { response ->
                     try {
-                        // Faz a leitura do retorno alojado dentro de records
-                        val res = JSONObject(response)
-                        val questionList = res.getJSONArray("records")
+                        //Obtem as respostas da pesquisa na API
+                        val jsonArray = JSONArray(response)
 
-                        for (i in 0 until questionList.length()) {
+                        //Para cada resposta obtem o seu id e constroi a url de acesso
+                        //para obter a primeira imagem que corresponde ao nome do exercício
+                        val element = jsonArray.getJSONObject(0)
+                        val id = element.getInt("_id")
+                        val res = imagesURL + id + "/" + id + "_300.png"
+                        imagesURL.plus(res)
 
-                            // Obtem a categoria
-                            val questionObject = questionList.getJSONObject(i)
+                        Log.d("Question Image: ", "$title $imagesURL")
 
-                            //Cria o objeto Question
-                            var Question: Question = Question()
-
-                            // Atribui as propriedades
-                            Question.id = Integer.parseInt(questionObject.getString("id"))
-                            Question.title = questionObject.getString("title")
-                            Question.type_name = questionObject.getString("type_name")
-                            Question.answer_01 = questionObject.getString("answer_01")
-                            Question.answer_02 = questionObject.getString("answer_02")
-                            Question.answer_03 = questionObject.getString("answer_03")
-                            Question.answer_04 = questionObject.getString("answer_04")
-                            Question.correct_answer = Integer.parseInt(questionObject.getString("correct_answer"))
-
-                            //Adiciona o objeto ao ArrayList
-                            questions.add(Question)
+                        if(imagesURL.size == images.size){
+                            changeTypeLayout(type, question, "", imagesURL)
                         }
-                        checkType()
-                        //Check type
-                        //Fill content
-                        //If multiple choice with images
-                        // Load images for all answers different than ""
-                        //If multiple choice with text
-                        // Load image for title
-                        //If complete text
-                        // Load image for title
+
                     } catch (e: JSONException) {
+                        Log.d("** Error **", e.toString())
                         e.printStackTrace()
                     }
                 },
@@ -236,54 +214,27 @@ class QuestionsActivity : AppCompatActivity(), MultipleChoiceWithTextFragment.On
             // Adicionar o pedido à RequestQueue.
             queue.add(stringRequest)
         }
+    }
 
-        private fun checkType(){
-            questions.forEach {
-                when(it.type_name){
-                    "Múltipla-escolha com imagens" -> supportFragmentManager
-                        .beginTransaction()
-                        .add(R.id.fragmentContainerView, MultipleChoiceWithImagesFragment() )
-                        .commit()
-                    "Múltipla-escolha com texto" -> fillMultipleChoiceWithText(it)
-                }
-            }
-
+    override fun onDataPass(selectedOption: String, correctOption: String) {
+        if (selectedOption == correctOption){
+            Toast.makeText(this, "Resposta correta", Toast.LENGTH_SHORT).show()
+            finished()
+        }else{
+            Toast.makeText(this, "Resposta errada", Toast.LENGTH_SHORT).show()
         }
+    }
 
-        private fun fillMultipleChoiceWithImages(question : Question){
-            findViewById<TextView>(R.id.MCWI_title).text = question.title
-            val option1 = findViewById<ImageButton>(R.id.MCWI_img1)
-            val option2 = findViewById<ImageButton>(R.id.MCWI_img2)
-            val option3 = findViewById<ImageButton>(R.id.MCWI_img3)
-            val option4 = findViewById<ImageButton>(R.id.MCWI_img4)
+    fun finished(){
+        currentFragment = ResultsFragment.newInstance()
+            supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainerView, currentFragment)
+            .commit()
+    }
 
-            //Load images for op 1 and 2
-
-            if(question.answer_03 == ""){
-                option3.visibility = View.GONE
-                return
-            }
-
-            //Load image for op 3
-
-            if (question.answer_04 == ""){
-                option4.visibility = View.GONE
-                return
-            }
-
-            //Load image for op 4
-        }
-
-        private fun fillMultipleChoiceWithText(question : Question){
-            findViewById<TextView>(R.id.MCWI_title).text = question.title
-            findViewById<Button>(R.id.MCWT_option1).text = question.answer_01
-            findViewById<Button>(R.id.MCWT_option2).text = question.answer_02
-            findViewById<Button>(R.id.MCWT_option3).text = question.answer_03
-            findViewById<Button>(R.id.MCWT_option4).text = question.answer_04
-            val imgTitle = findViewById<ImageView>(R.id.MCWT_imgTitle)
-
-            //Load images for title
-
-        }*/
+    fun redirectToExercises(view: View){
+        val intent = Intent(this, ExerciseActivity::class.java)
+        startActivity(intent)
+    }
 
 }
