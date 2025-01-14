@@ -160,9 +160,10 @@ class LetMeGuestActivity : AppCompatActivity() {
 
                             // Fala o que foi reconhecido
                             speak(spokenText)
+                        }else{
+                            Toast.makeText(this@LetMeGuestActivity, R.string.errorOnTTS, Toast.LENGTH_SHORT)
+                                .show()
                         }
-                        Toast.makeText(this@LetMeGuestActivity, R.string.errorOnTTS, Toast.LENGTH_SHORT)
-                            .show()
                     }
 
                     override fun onPartialResults(partialResults: Bundle?) {}
