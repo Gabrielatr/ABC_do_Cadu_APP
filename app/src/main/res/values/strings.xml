@@ -82,5 +82,6 @@
     <string name="errorConnectionAPI">Erro ao conectar com a API</string>
     <string name="errorGetResponseAPI">Erro ao obter resposta da API</string>
     <string name="btnQuestion">Continuar</string>
+    <string name="finish">Parabéns! Você chegou até o final!</string>
 
 </resources>
