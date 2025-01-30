@@ -112,7 +112,7 @@ class WordsActivity : AppCompatActivity(), WordsAdapter.OnWordClickListener {
             status ->
                 if(status == TextToSpeech.SUCCESS) {
 
-                    val result = textToSpeech.setLanguage(Locale("pt", "BR"))
+                    val result = textToSpeech.setLanguage(Locale("pt", "PT"))
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Toast.makeText(this, "Erro na linguagem", Toast.LENGTH_SHORT).show()
                     }

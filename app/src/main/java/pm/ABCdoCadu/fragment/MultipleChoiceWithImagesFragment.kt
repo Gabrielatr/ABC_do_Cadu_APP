@@ -58,7 +58,7 @@ class MultipleChoiceWithImagesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_multiple_choice_with_text, container, false)
+        return inflater.inflate(R.layout.fragment_multiple_choice_with_images, container, false)
     }
 
     @SuppressLint("ResourceAsColor", "UseCompatLoadingForDrawables")
@@ -67,44 +67,38 @@ class MultipleChoiceWithImagesFragment : Fragment() {
 
         // Separa as views
         val title = view.findViewById<TextView>(R.id.txtImageTitle)
-        val btnOption1 = view.findViewById<ImageView>(R.id.txtOption1)
-        val btnOption2 = view.findViewById<ImageView>(R.id.txtOption2)
-        val btnOption3 = view.findViewById<ImageView>(R.id.txtOption3)
-        val btnOption4 = view.findViewById<ImageView>(R.id.txtOption4)
+        val btnOption1 = view.findViewById<ImageView>(R.id.imgOpt1)
+        val btnOption2 = view.findViewById<ImageView>(R.id.imgOpt2)
+        val btnOption3 = view.findViewById<ImageView>(R.id.imgOpt3)
+        val btnOption4 = view.findViewById<ImageView>(R.id.imgOpt4)
         val btnCheckAnswer = view.findViewById<Button>(R.id.btnImageQuestion)
 
         // Substitui o conteúdo das views pelo valor dos parametros
         title.text = imgTitle
 
+        Log.d("imgTitle-Image", imgTitle.toString())
+        Log.d("optOne-Image", optOne.toString())
+
         // Carrega as imagens
         Picasso.get()
-            .load(imgTitle)
+            .load(optOne)
             .into(btnOption1)
         Picasso.get()
-            .load(imgTitle)
+            .load(optTwo)
             .into(btnOption2)
-
 
         // Verifica se a opção 3 e 4 existem, atribui o texto e torna a opção visível
         if(optTree != "") {
             Picasso.get()
-                .load(imgTitle)
+                .load(optTree)
                 .into(btnOption3)
             btnOption3.visibility = View.VISIBLE
         }
         if(optFour != "") {
             Picasso.get()
-                .load(imgTitle)
+                .load(optFour)
                 .into(btnOption4)
             btnOption4.visibility = View.VISIBLE
-        }
-
-        // Verifica qual a opção correta e atribui o valor ao campo correto
-        when(correctOpt) {
-            "1" -> btnOption1.contentDescription = "correto"
-            "2" -> btnOption2.contentDescription = "correto"
-            "3" -> btnOption3.contentDescription = "correto"
-            "4" -> btnOption4.contentDescription = "correto"
         }
 
         // Adiciona o evento de clique nas opções
@@ -132,7 +126,7 @@ class MultipleChoiceWithImagesFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(img_title: String, opt_one: String, opt_two: String, opt_tree: String, opt_four: String, correct_opt: String) =
-            MultipleChoiceWithTextFragment().apply {
+            MultipleChoiceWithImagesFragment().apply {
                 arguments = Bundle().apply {
                     putString(IMG_TITLE, img_title)
                     putString(OPT_ONE, opt_one)

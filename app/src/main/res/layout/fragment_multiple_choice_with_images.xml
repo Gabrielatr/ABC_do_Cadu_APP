@@ -44,13 +44,13 @@
                 android:gravity="center">
 
                 <ImageButton
-                    android:id="@+id/imageButton9"
+                    android:id="@+id/imgOpt1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:src="@tools:sample/avatars" />
 
                 <ImageButton
-                    android:id="@+id/imageButton10"
+                    android:id="@+id/imgOpt2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:src="@tools:sample/avatars" />
@@ -62,14 +62,14 @@
                 android:gravity="center">
 
                 <ImageButton
-                    android:id="@+id/imageButton11"
+                    android:id="@+id/imgOpt3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="invisible"
                     tools:src="@tools:sample/avatars" />
 
                 <ImageButton
-                    android:id="@+id/imageButton12"
+                    android:id="@+id/imgOpt4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="invisible"

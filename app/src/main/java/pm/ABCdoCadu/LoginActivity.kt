@@ -45,11 +45,8 @@ class LoginActivity : AppCompatActivity() {
                 signIn(email, password)
             }
             btnRegister.setOnClickListener {
-                val email = binding.inputEmail.text.toString()
-                val password = binding.inputPassword.text.toString()
-                createAccount(email, password)
+                redirectToRegister()
             }
-
         }
 
         // Initialize Firebase Auth
@@ -64,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
                 .apply()
         }
     }
-    // Login - Firebase
 
     public override fun onStart() {
         super.onStart()
@@ -74,40 +70,6 @@ class LoginActivity : AppCompatActivity() {
         if (currentUser != null) {
             reload()
         }
-    }
-
-    private fun createAccount(email: String, password: String) {
-        Log.d(TAG, "createAccount:$email")
-        if (!validateForm()) {
-            return
-        }
-
-        showProgressBar()
-
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                    startActivity(Intent(this,HomeActivity::class.java))
-                } else {
-
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        this,
-                        "Authentication failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
-                    updateUI(null)
-                }
-
-                hideProgressBar()
-            }
-        holdLogin()
     }
 
     private fun signIn(email: String, password: String) {
@@ -140,21 +102,11 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 if (!task.isSuccessful) {
-                    Toast.makeText(this, R.string.auth_failed, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, R.string.status_sign_in_failed, Toast.LENGTH_SHORT).show()
                 }
                 hideProgressBar()
             }
         holdLogin()
-    }
-
-    private fun signOut() {
-        val sharedPreferences = this.getSharedPreferences("pmLogin", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("login", false)
-        editor.apply()
-
-        auth.signOut()
-        updateUI(null)
     }
 
     /*private fun sendEmailVerification() {
@@ -239,6 +191,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    fun redirectToRegister(){
+        startActivity(Intent(this,RegisterActivity::class.java))
+    }
 
     companion object {
         private const val TAG = "EmailPassword"

@@ -76,6 +76,9 @@ class MultipleChoiceWithTextFragment : Fragment() {
         // Substitui o conteúdo das views pelo valor dos parametros
         img.contentDescription = imgTitle
 
+        Log.d("imgTitle", imgTitle.toString())
+        Log.d("optOne", optOne.toString())
+
         // Carrega a imagem
         Picasso.get()
             .load(imgTitle)
@@ -87,21 +90,11 @@ class MultipleChoiceWithTextFragment : Fragment() {
         // Verifica se a opção 3 e 4 existem, atribui o texto e torna a opção visível
         if(optTree != "") {
             txtOption3.text = optTree
-            Log.d("optTree", optTree.toString())
-            Log.d("txtOption3", txtOption3.text.toString())
             txtOption3.visibility = View.VISIBLE
         }
         if(optFour != "") {
             txtOption4.text = optFour
             txtOption4.visibility = View.VISIBLE
-        }
-
-        // Verifica qual a opção correta e atribui o valor ao campo correto
-        when(correctOpt) {
-            "1" -> txtOption1.contentDescription = "correto"
-            "2" -> txtOption2.contentDescription = "correto"
-            "3" -> txtOption3.contentDescription = "correto"
-            "4" -> txtOption4.contentDescription = "correto"
         }
 
         // Adiciona o evento de clique nas opções

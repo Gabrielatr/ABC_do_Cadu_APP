@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_questao1"
+        android:icon="@android:drawable/btn_star_big_off"
+        android:title="1" />
+    <item
+        android:id="@+id/nav_questao2"
+        android:icon="@android:drawable/btn_star_big_off"
+        android:title="2" />
+    <item
+        android:id="@+id/nav_questao3"
+        android:icon="@android:drawable/btn_star_big_off"
+        android:title="3" />
+    <item
+        android:id="@+id/nav_questao4"
+        android:icon="@android:drawable/btn_star_big_off"
+        android:title="4" />
+    <item
+        android:id="@+id/nav_questao5"
+        android:icon="@android:drawable/btn_star_big_off"
+        android:title="5" />
+</menu>

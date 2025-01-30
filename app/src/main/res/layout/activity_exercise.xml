@@ -25,13 +25,12 @@
         app:layout_constraintBottom_toBottomOf="@+id/toolbarExercise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar3">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/btnExerciseGoToHome"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginBottom="21dp"
             android:backgroundTint="#00FFFFFF"
             android:clickable="false"
             android:onClick="goToHome"
@@ -39,10 +38,10 @@
 
         <TextView
             android:id="@+id/textView6"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:text="@string/ic_back"
             android:textSize="20sp" />
 
@@ -56,6 +55,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarExercise"
-        tools:listitem="@layout/item_exercise" />
+        tools:listitem="@layout/item_exercise">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

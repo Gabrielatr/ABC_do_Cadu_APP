@@ -22,9 +22,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnExerciseGoToHome2"
+        android:id="@+id/btnExerciseGoToHome"
         android:layout_width="50dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:backgroundTint="#00FFFFFF"
         android:onClick="redirectToHome"
@@ -34,18 +34,16 @@
         app:srcCompat="@drawable/ic_back" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="6dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center_vertical"
         android:text="@string/ic_back"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
-        app:layout_constraintStart_toEndOf="@+id/btnExerciseGoToHome2"
-        app:layout_constraintTop_toTopOf="@+id/toolbar3"
-        app:layout_constraintVertical_bias="0.372" />
+        app:layout_constraintStart_toEndOf="@+id/btnExerciseGoToHome"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/CategoriesView"
@@ -56,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3"
-        app:spanCount="2"
+        app:spanCount="4"
         tools:layout_conversion_absoluteHeight="924dp"
         tools:layout_conversion_absoluteWidth="411dp"
         tools:listitem="@layout/item_category" />
