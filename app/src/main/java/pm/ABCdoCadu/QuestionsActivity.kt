@@ -47,11 +47,9 @@ class QuestionsActivity : AppCompatActivity(), MultipleChoiceWithTextFragment.On
 
         val exerciseId = intent.getIntExtra("exercise_id", 0)
         fillQuestionsList(exerciseId)
-        binding.bottomNavigationView.inflateMenu(R.menu.nav_menu)
     }
 
     private fun fillQuestionsList(idExerciselist: Int){
-
         // Inicializar a RequestQueue e definir o URL do pedido
         val queue = Volley.newRequestQueue(this)
         val url = "https://esan-tesp-ds-paw.web.ua.pt/tesp-ds-g5/projeto/api/question/questions_of_exercise.php?id=$idExerciselist"
@@ -73,6 +71,7 @@ class QuestionsActivity : AppCompatActivity(), MultipleChoiceWithTextFragment.On
                         val questionObject = questionList.getJSONObject(i)
                         Log.d("Question Object", questionObject.toString())
 
+                        // Se a questao pertence a este exercicio, adiciona na lista
                         if(questionObject.getString("exercise_id") == idExerciselist.toString()){
                             //Cria o objeto Question
                             var question: Question = Question()
@@ -92,7 +91,6 @@ class QuestionsActivity : AppCompatActivity(), MultipleChoiceWithTextFragment.On
                         }
                     }
                     if (questionsList.size > 0){
-                        setMenu()
                         setCurrentQuestion()
                     }else{
                         Toast.makeText(this, R.string.status_no_questions_for_exercise, Toast.LENGTH_SHORT).show()
@@ -107,43 +105,6 @@ class QuestionsActivity : AppCompatActivity(), MultipleChoiceWithTextFragment.On
 
         // Adicionar o pedido à RequestQueue.
         queue.add(stringRequest)
-    }
-
-    private fun setMenu(){
-        val size = questionsList.size
-        val menu = binding.bottomNavigationView.menu
-
-        if(size < 2){
-            binding.bottomNavigationView.menu.removeItem(R.id.nav_questao2)
-        }
-        if(size < 3){
-            binding.bottomNavigationView.menu.removeItem(R.id.nav_questao3)
-        }
-        if(size < 4){
-            binding.bottomNavigationView.menu.removeItem(R.id.nav_questao4)
-        }
-        if(size < 5){
-            binding.bottomNavigationView.menu.removeItem(R.id.nav_questao5)
-        }
-
-        Log.d("size: ", size.toString())
-        Log.d("menu 1: ", menu.findItem(5).toString())
-
-        /*binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            when(item.itemId) {
-                R.id.nav_questao1 -> {
-                    currentPosition = 0
-                    setCurrentQuestion()
-                }
-                R.id.nav_questao2 -> {
-                    currentPosition = 1
-                    setCurrentQuestion()
-                }
-            }
-            true
-        }*/
-        binding.bottomNavigationView.menu.
-        binding.bottomNavigationView.selectedItemId = R.id.nav_questao1
     }
 
     private fun setCurrentQuestion(){
@@ -190,12 +151,6 @@ class QuestionsActivity : AppCompatActivity(), MultipleChoiceWithTextFragment.On
             }
             "Múltipla-escolha com imagens" ->{
                 Log.d("Type: ", "Múltipla-escolha com imagens")
-                Log.d("Images URLS: ", "$images")
-                Log.d("Image 0: ", "${images[0]}")
-                Log.d("Image 1: ", "${images[1]}")
-                Log.d("Image 2: ", "${images[2]}")
-                Log.d("Image 3: ", "${images[3]}")
-
                 currentFragment = MultipleChoiceWithImagesFragment.newInstance(
                     question.title, images[0], images[1], images[2], images[3], question.correct_answer)
                 supportFragmentManager.beginTransaction()
@@ -216,7 +171,6 @@ class QuestionsActivity : AppCompatActivity(), MultipleChoiceWithTextFragment.On
     }
 
     private fun getImageURL(question: Question){
-
         // Inicializar a RequestQueue e definir o URL do pedido
         val queue = Volley.newRequestQueue(this)
         val searchURL = "https://api.arasaac.org/api/pictograms/pt/search/"
@@ -291,8 +245,8 @@ class QuestionsActivity : AppCompatActivity(), MultipleChoiceWithTextFragment.On
                         Log.d("Images URLS: ", "$imagesURLs Size: ${imagesURLs.size}")
                         Log.d("Image's Name: ", "$images Size: ${images.size}")
 
-
-                        if(!imagesURLs.contains("0")){
+                        // Verifica se os campos obrigatorios estão preenchidos e os opcionais vazios
+                        if(!imagesURLs.contains("0") && imagesURLs[0] != "" && imagesURLs[1] != ""){
                             changeTypeLayout(question.type_name, question, "", imagesURLs)
                         }
 
